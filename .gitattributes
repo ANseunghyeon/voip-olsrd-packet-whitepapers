@@ -1,0 +1,8 @@
+*.pdf binary
+*.docx binary
+*.bin binary
+*.pcap binary
+*.xml -text
+*.py text eol=lf
+*.json text eol=lf
+*.md text eol=lf

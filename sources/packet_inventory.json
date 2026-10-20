@@ -1,0 +1,4200 @@
+{
+  "sip-parameters-2": [
+    {
+      "value": "Accept",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Accept-Contact",
+      "compact": "a",
+      "spec": "RFC 3841"
+    },
+    {
+      "value": "Accept-Encoding",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Accept-Language",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Accept-Resource-Priority",
+      "spec": "RFC 4412"
+    },
+    {
+      "value": "Additional-Identity",
+      "spec": "3GPP TS 24.229 v16.7.0 Dongwook_Kim"
+    },
+    {
+      "value": "Alert-Info",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "AlertMsg-Error",
+      "spec": "RFC 8876"
+    },
+    {
+      "value": "Allow",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Allow-Events",
+      "compact": "u",
+      "spec": "RFC 6665"
+    },
+    {
+      "value": "Answer-Mode",
+      "spec": "RFC 5373"
+    },
+    {
+      "value": "Attestation-Info",
+      "spec": "3GPP TS 24.229 v15.11.0 Dongwook_Kim"
+    },
+    {
+      "value": "Authentication-Info",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Authorization",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Call-ID",
+      "compact": "i",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Call-Info",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Cellular-Network-Info",
+      "spec": "3GPP TS 24.229 v13.9.0 Dongwook_Kim"
+    },
+    {
+      "value": "Contact",
+      "compact": "m",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Content-Disposition",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Content-Encoding",
+      "compact": "e",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Content-ID",
+      "compact": "",
+      "spec": "RFC 8262"
+    },
+    {
+      "value": "Content-Language",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Content-Length",
+      "compact": "l",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Content-Type",
+      "compact": "c",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "CSeq",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Date",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "DC-Info",
+      "spec": "3GPP TS 24.229 v19.4.1 Dongwook_Kim"
+    },
+    {
+      "value": "Encryption (Deprecated)",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Error-Info",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Event",
+      "compact": "o",
+      "spec": "RFC 6665RFC 6446"
+    },
+    {
+      "value": "Expires",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Feature-Caps",
+      "spec": "RFC 6809"
+    },
+    {
+      "value": "Flow-Timer",
+      "spec": "RFC 5626"
+    },
+    {
+      "value": "From",
+      "compact": "f",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Geolocation",
+      "spec": "RFC 6442"
+    },
+    {
+      "value": "Geolocation-Error",
+      "spec": "RFC 6442"
+    },
+    {
+      "value": "Geolocation-Routing",
+      "spec": "RFC 6442"
+    },
+    {
+      "value": "Hide (Deprecated)",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "History-Info",
+      "spec": "RFC 7044"
+    },
+    {
+      "value": "Identity",
+      "compact": "y",
+      "spec": "RFC 8224"
+    },
+    {
+      "value": "Identity-Info (deprecated by RFC 8224)",
+      "compact": "",
+      "spec": "RFC 8224"
+    },
+    {
+      "value": "Info-Package",
+      "spec": "RFC 6086"
+    },
+    {
+      "value": "In-Reply-To",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Join",
+      "spec": "RFC 3911"
+    },
+    {
+      "value": "Max-Breadth",
+      "spec": "RFC 5393"
+    },
+    {
+      "value": "Max-Forwards",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "MIME-Version",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Min-Expires",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Min-SE",
+      "spec": "RFC 4028"
+    },
+    {
+      "value": "Organization",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Origination-Id",
+      "spec": "3GPP TS 24.229 v15.11.0 Dongwook_Kim"
+    },
+    {
+      "value": "P-Access-Network-Info",
+      "spec": "RFC 7315"
+    },
+    {
+      "value": "P-Answer-State",
+      "spec": "RFC 4964"
+    },
+    {
+      "value": "P-Asserted-Identity",
+      "spec": "RFC 3325"
+    },
+    {
+      "value": "P-Asserted-Service",
+      "spec": "RFC 6050"
+    },
+    {
+      "value": "P-Associated-URI",
+      "spec": "RFC 7315"
+    },
+    {
+      "value": "P-Called-Party-ID",
+      "spec": "RFC 7315"
+    },
+    {
+      "value": "P-Charge-Info",
+      "spec": "RFC 8496"
+    },
+    {
+      "value": "P-Charging-Function-Addresses",
+      "spec": "RFC 7315"
+    },
+    {
+      "value": "P-Charging-Vector",
+      "spec": "RFC 7315"
+    },
+    {
+      "value": "P-DCS-Trace-Party-ID",
+      "spec": "RFC 5503"
+    },
+    {
+      "value": "P-DCS-OSPS",
+      "spec": "RFC 5503"
+    },
+    {
+      "value": "P-DCS-Billing-Info",
+      "spec": "RFC 5503"
+    },
+    {
+      "value": "P-DCS-LAES",
+      "spec": "RFC 5503"
+    },
+    {
+      "value": "P-DCS-Redirect",
+      "spec": "RFC 5503"
+    },
+    {
+      "value": "P-Early-Media",
+      "spec": "RFC 5009"
+    },
+    {
+      "value": "P-Media-Authorization",
+      "spec": "RFC 3313"
+    },
+    {
+      "value": "P-Preferred-Identity",
+      "spec": "RFC 3325"
+    },
+    {
+      "value": "P-Preferred-Service",
+      "spec": "RFC 6050"
+    },
+    {
+      "value": "P-Private-Network-Indication",
+      "spec": "RFC 7316"
+    },
+    {
+      "value": "P-Profile-Key",
+      "spec": "RFC 5002"
+    },
+    {
+      "value": "P-Refused-URI-List",
+      "spec": "RFC 5318"
+    },
+    {
+      "value": "P-Served-User",
+      "spec": "RFC 5502 RFC 8498"
+    },
+    {
+      "value": "P-User-Database",
+      "spec": "RFC 4457"
+    },
+    {
+      "value": "P-Visited-Network-ID",
+      "spec": "RFC 7315"
+    },
+    {
+      "value": "Path",
+      "spec": "RFC 3327"
+    },
+    {
+      "value": "Permission-Missing",
+      "spec": "RFC 5360"
+    },
+    {
+      "value": "Policy-Contact",
+      "spec": "RFC 6794"
+    },
+    {
+      "value": "Policy-ID",
+      "spec": "RFC 6794"
+    },
+    {
+      "value": "Priority",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Priority-Share",
+      "spec": "3GPP TS 24.229 v13.16.0 Dongwook_Kim"
+    },
+    {
+      "value": "Priority-Verstat",
+      "spec": "3GPP TS 24.229 Lionel_Morand"
+    },
+    {
+      "value": "Priv-Answer-Mode",
+      "spec": "RFC 5373"
+    },
+    {
+      "value": "Privacy",
+      "spec": "RFC 3323"
+    },
+    {
+      "value": "Proxy-Authenticate",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Proxy-Authorization",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Proxy-Require",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "RAck",
+      "spec": "RFC 3262"
+    },
+    {
+      "value": "Reason",
+      "spec": "RFC 3326"
+    },
+    {
+      "value": "Reason-Phrase",
+      "spec": "Reserved to avoid conflict with RFC 6873. Adam_Roach"
+    },
+    {
+      "value": "Record-Route",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Recv-Info",
+      "spec": "RFC 6086"
+    },
+    {
+      "value": "Refer-Events-At",
+      "spec": "RFC 7614"
+    },
+    {
+      "value": "Refer-Sub",
+      "spec": "RFC 4488"
+    },
+    {
+      "value": "Refer-To",
+      "compact": "r",
+      "spec": "RFC 3515"
+    },
+    {
+      "value": "Referred-By",
+      "compact": "b",
+      "spec": "RFC 3892"
+    },
+    {
+      "value": "Reject-Contact",
+      "compact": "j",
+      "spec": "RFC 3841"
+    },
+    {
+      "value": "Relayed-Charge",
+      "spec": "3GPP TS 24.229 v12.14.0 Dongwook_Kim"
+    },
+    {
+      "value": "Replaces",
+      "spec": "RFC 3891"
+    },
+    {
+      "value": "Reply-To",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Request-Disposition",
+      "compact": "d",
+      "spec": "RFC 3841"
+    },
+    {
+      "value": "Require",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Resource-Priority",
+      "spec": "RFC 4412"
+    },
+    {
+      "value": "Resource-Share",
+      "spec": "3GPP TS 24.229 v13.7.0 Dongwook_Kim"
+    },
+    {
+      "value": "Response-Key (Deprecated)",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Response-Source",
+      "spec": "3GPP TS 24.229 v15.11.0 Dongwook_Kim"
+    },
+    {
+      "value": "Restoration-Info",
+      "spec": "3GPP TS 24.229 v12.14.0 Dongwook_Kim"
+    },
+    {
+      "value": "Retry-After",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Route",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "RSeq",
+      "spec": "RFC 3262"
+    },
+    {
+      "value": "Security-Client",
+      "spec": "RFC 3329"
+    },
+    {
+      "value": "Security-Server",
+      "spec": "RFC 3329"
+    },
+    {
+      "value": "Security-Verify",
+      "spec": "RFC 3329"
+    },
+    {
+      "value": "Server",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Service-Interact-Info",
+      "spec": "3GPP TS 24.229 v13.18.0 Dongwook_Kim"
+    },
+    {
+      "value": "Service-Route",
+      "spec": "RFC 3608"
+    },
+    {
+      "value": "Session-Expires",
+      "compact": "x",
+      "spec": "RFC 4028"
+    },
+    {
+      "value": "Session-ID",
+      "spec": "RFC 7989"
+    },
+    {
+      "value": "SIP-ETag",
+      "spec": "RFC 3903"
+    },
+    {
+      "value": "SIP-If-Match",
+      "spec": "RFC 3903"
+    },
+    {
+      "value": "Subject",
+      "compact": "s",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Subscription-State",
+      "spec": "RFC 6665"
+    },
+    {
+      "value": "Supported",
+      "compact": "k",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Suppress-If-Match",
+      "spec": "RFC 5839"
+    },
+    {
+      "value": "Target-Dialog",
+      "spec": "RFC 4538"
+    },
+    {
+      "value": "Timestamp",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "To",
+      "compact": "t",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "Trigger-Consent",
+      "spec": "RFC 5360"
+    },
+    {
+      "value": "Unsupported",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "User-Agent",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "User-to-User",
+      "spec": "RFC 7433"
+    },
+    {
+      "value": "Via",
+      "compact": "v",
+      "spec": "RFC 3261RFC 7118"
+    },
+    {
+      "value": "Warning",
+      "spec": "RFC 3261"
+    },
+    {
+      "value": "WWW-Authenticate",
+      "spec": "RFC 3261"
+    }
+  ],
+  "sip-parameters-6": [
+    {
+      "value": "ACK",
+      "refs": [
+        "RFC 3261"
+      ]
+    },
+    {
+      "value": "BYE",
+      "refs": [
+        "RFC 3261"
+      ]
+    },
+    {
+      "value": "CANCEL",
+      "refs": [
+        "RFC 3261"
+      ]
+    },
+    {
+      "value": "INFO",
+      "refs": [
+        "RFC 6086"
+      ]
+    },
+    {
+      "value": "INVITE",
+      "refs": [
+        "RFC 3261",
+        "RFC 6026"
+      ]
+    },
+    {
+      "value": "MESSAGE",
+      "refs": [
+        "RFC 3428"
+      ]
+    },
+    {
+      "value": "NOTIFY",
+      "refs": [
+        "RFC 6665"
+      ]
+    },
+    {
+      "value": "OPTIONS",
+      "refs": [
+        "RFC 3261"
+      ]
+    },
+    {
+      "value": "PRACK",
+      "refs": [
+        "RFC 3262"
+      ]
+    },
+    {
+      "value": "PUBLISH",
+      "refs": [
+        "RFC 3903"
+      ]
+    },
+    {
+      "value": "REFER",
+      "refs": [
+        "RFC 3515"
+      ]
+    },
+    {
+      "value": "REGISTER",
+      "refs": [
+        "RFC 3261"
+      ]
+    },
+    {
+      "value": "SUBSCRIBE",
+      "refs": [
+        "RFC 6665"
+      ]
+    },
+    {
+      "value": "UPDATE",
+      "refs": [
+        "RFC 3311"
+      ]
+    }
+  ],
+  "sip-parameters-7": [
+    {
+      "value": "100",
+      "description": "Trying"
+    },
+    {
+      "value": "180",
+      "description": "Ringing"
+    },
+    {
+      "value": "181",
+      "description": "Call Is Being Forwarded"
+    },
+    {
+      "value": "182",
+      "description": "Queued"
+    },
+    {
+      "value": "183",
+      "description": "Session Progress"
+    },
+    {
+      "value": "199",
+      "description": "Early Dialog Terminated",
+      "refs": [
+        "RFC 6228"
+      ]
+    },
+    {
+      "value": "200",
+      "description": "OK"
+    },
+    {
+      "value": "202",
+      "description": "Accepted (Deprecated)",
+      "refs": [
+        "RFC 6665"
+      ]
+    },
+    {
+      "value": "204",
+      "description": "No Notification",
+      "refs": [
+        "RFC 5839"
+      ]
+    },
+    {
+      "value": "300",
+      "description": "Multiple Choices"
+    },
+    {
+      "value": "301",
+      "description": "Moved Permanently"
+    },
+    {
+      "value": "302",
+      "description": "Moved Temporarily"
+    },
+    {
+      "value": "305",
+      "description": "Use Proxy"
+    },
+    {
+      "value": "380",
+      "description": "Alternative Service"
+    },
+    {
+      "value": "400",
+      "description": "Bad Request"
+    },
+    {
+      "value": "401",
+      "description": "Unauthorized"
+    },
+    {
+      "value": "402",
+      "description": "Payment Required"
+    },
+    {
+      "value": "403",
+      "description": "Forbidden"
+    },
+    {
+      "value": "404",
+      "description": "Not Found"
+    },
+    {
+      "value": "405",
+      "description": "Method Not Allowed"
+    },
+    {
+      "value": "406",
+      "description": "Not Acceptable"
+    },
+    {
+      "value": "407",
+      "description": "Proxy Authentication Required"
+    },
+    {
+      "value": "408",
+      "description": "Request Timeout"
+    },
+    {
+      "value": "410",
+      "description": "Gone"
+    },
+    {
+      "value": "412",
+      "description": "Conditional Request Failed",
+      "refs": [
+        "RFC 3903"
+      ]
+    },
+    {
+      "value": "413",
+      "description": "Request Entity Too Large"
+    },
+    {
+      "value": "414",
+      "description": "Request-URI Too Long"
+    },
+    {
+      "value": "415",
+      "description": "Unsupported Media Type"
+    },
+    {
+      "value": "416",
+      "description": "Unsupported URI Scheme"
+    },
+    {
+      "value": "417",
+      "description": "Unknown Resource-Priority",
+      "refs": [
+        "RFC 4412"
+      ]
+    },
+    {
+      "value": "420",
+      "description": "Bad Extension"
+    },
+    {
+      "value": "421",
+      "description": "Extension Required"
+    },
+    {
+      "value": "422",
+      "description": "Session Interval Too Small",
+      "refs": [
+        "RFC 4028"
+      ]
+    },
+    {
+      "value": "423",
+      "description": "Interval Too Brief"
+    },
+    {
+      "value": "424",
+      "description": "Bad Location Information",
+      "refs": [
+        "RFC 6442"
+      ]
+    },
+    {
+      "value": "425",
+      "description": "Bad Alert Message",
+      "refs": [
+        "RFC 8876"
+      ]
+    },
+    {
+      "value": "428",
+      "description": "Use Identity Header",
+      "refs": [
+        "RFC 8224"
+      ]
+    },
+    {
+      "value": "429",
+      "description": "Provide Referrer Identity",
+      "refs": [
+        "RFC 3892"
+      ]
+    },
+    {
+      "value": "430",
+      "description": "Flow Failed",
+      "refs": [
+        "RFC 5626"
+      ]
+    },
+    {
+      "value": "433",
+      "description": "Anonymity Disallowed",
+      "refs": [
+        "RFC 5079"
+      ]
+    },
+    {
+      "value": "436",
+      "description": "Bad Identity Info",
+      "refs": [
+        "RFC 8224"
+      ]
+    },
+    {
+      "value": "437",
+      "description": "Unsupported Credential",
+      "refs": [
+        "RFC 8224"
+      ]
+    },
+    {
+      "value": "438",
+      "description": "Invalid Identity Header",
+      "refs": [
+        "RFC 8224"
+      ]
+    },
+    {
+      "value": "439",
+      "description": "First Hop Lacks Outbound Support",
+      "refs": [
+        "RFC 5626"
+      ]
+    },
+    {
+      "value": "440",
+      "description": "Max-Breadth Exceeded",
+      "refs": [
+        "RFC 5393"
+      ]
+    },
+    {
+      "value": "469",
+      "description": "Bad Info Package",
+      "refs": [
+        "RFC 6086"
+      ]
+    },
+    {
+      "value": "470",
+      "description": "Consent Needed",
+      "refs": [
+        "RFC 5360"
+      ]
+    },
+    {
+      "value": "480",
+      "description": "Temporarily Unavailable"
+    },
+    {
+      "value": "481",
+      "description": "Call/Transaction Does Not Exist"
+    },
+    {
+      "value": "482",
+      "description": "Loop Detected"
+    },
+    {
+      "value": "483",
+      "description": "Too Many Hops"
+    },
+    {
+      "value": "484",
+      "description": "Address Incomplete"
+    },
+    {
+      "value": "485",
+      "description": "Ambiguous"
+    },
+    {
+      "value": "486",
+      "description": "Busy Here"
+    },
+    {
+      "value": "487",
+      "description": "Request Terminated"
+    },
+    {
+      "value": "488",
+      "description": "Not Acceptable Here"
+    },
+    {
+      "value": "489",
+      "description": "Bad Event",
+      "refs": [
+        "RFC 6665"
+      ]
+    },
+    {
+      "value": "491",
+      "description": "Request Pending"
+    },
+    {
+      "value": "493",
+      "description": "Undecipherable"
+    },
+    {
+      "value": "494",
+      "description": "Security Agreement Required",
+      "refs": [
+        "RFC 3329"
+      ]
+    },
+    {
+      "value": "500",
+      "description": "Server Internal Error"
+    },
+    {
+      "value": "501",
+      "description": "Not Implemented"
+    },
+    {
+      "value": "502",
+      "description": "Bad Gateway"
+    },
+    {
+      "value": "503",
+      "description": "Service Unavailable"
+    },
+    {
+      "value": "504",
+      "description": "Server Time-out"
+    },
+    {
+      "value": "505",
+      "description": "Version Not Supported"
+    },
+    {
+      "value": "513",
+      "description": "Message Too Large"
+    },
+    {
+      "value": "555",
+      "description": "Push Notification Service Not Supported",
+      "refs": [
+        "RFC 8599"
+      ]
+    },
+    {
+      "value": "580",
+      "description": "Precondition Failure",
+      "refs": [
+        "RFC 3312"
+      ]
+    },
+    {
+      "value": "600",
+      "description": "Busy Everywhere"
+    },
+    {
+      "value": "603",
+      "description": "Decline"
+    },
+    {
+      "value": "604",
+      "description": "Does Not Exist Anywhere"
+    },
+    {
+      "value": "606",
+      "description": "Not Acceptable"
+    },
+    {
+      "value": "607",
+      "description": "Unwanted",
+      "refs": [
+        "RFC 8197"
+      ]
+    },
+    {
+      "value": "608",
+      "description": "Rejected",
+      "refs": [
+        "RFC 8688"
+      ]
+    }
+  ],
+  "rtp-parameters-1": [
+    {
+      "value": "0",
+      "name": "PCMU",
+      "av": "A",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "1",
+      "name": "Reserved"
+    },
+    {
+      "value": "2",
+      "name": "Reserved"
+    },
+    {
+      "value": "3",
+      "name": "GSM",
+      "av": "A",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "4",
+      "name": "G723",
+      "av": "A",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "Vineet_Kumar",
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "5",
+      "name": "DVI4",
+      "av": "A",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "6",
+      "name": "DVI4",
+      "av": "A",
+      "clock_rate": "16000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "7",
+      "name": "LPC",
+      "av": "A",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "8",
+      "name": "PCMA",
+      "av": "A",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "9",
+      "name": "G722",
+      "av": "A",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "10",
+      "name": "L16",
+      "av": "A",
+      "clock_rate": "44100",
+      "channels": "2",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "11",
+      "name": "L16",
+      "av": "A",
+      "clock_rate": "44100",
+      "channels": "1",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "12",
+      "name": "QCELP",
+      "av": "A",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "13",
+      "name": "CN",
+      "av": "A",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3389"
+      ]
+    },
+    {
+      "value": "14",
+      "name": "MPA",
+      "av": "A",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 3551",
+        "RFC 2250"
+      ]
+    },
+    {
+      "value": "15",
+      "name": "G728",
+      "av": "A",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "16",
+      "name": "DVI4",
+      "av": "A",
+      "clock_rate": "11025",
+      "channels": "1",
+      "refs": [
+        "Joseph_Di_Pol"
+      ]
+    },
+    {
+      "value": "17",
+      "name": "DVI4",
+      "av": "A",
+      "clock_rate": "22050",
+      "channels": "1",
+      "refs": [
+        "Joseph_Di_Pol"
+      ]
+    },
+    {
+      "value": "18",
+      "name": "G729",
+      "av": "A",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "19",
+      "name": "Reserved",
+      "av": "A"
+    },
+    {
+      "value": "20",
+      "name": "Unassigned",
+      "av": "A"
+    },
+    {
+      "value": "21",
+      "name": "Unassigned",
+      "av": "A"
+    },
+    {
+      "value": "22",
+      "name": "Unassigned",
+      "av": "A"
+    },
+    {
+      "value": "23",
+      "name": "Unassigned",
+      "av": "A"
+    },
+    {
+      "value": "24",
+      "name": "Unassigned",
+      "av": "V"
+    },
+    {
+      "value": "25",
+      "name": "CelB",
+      "av": "V",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 2029"
+      ]
+    },
+    {
+      "value": "26",
+      "name": "JPEG",
+      "av": "V",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 2435"
+      ]
+    },
+    {
+      "value": "27",
+      "name": "Unassigned",
+      "av": "V"
+    },
+    {
+      "value": "28",
+      "name": "nv",
+      "av": "V",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "29",
+      "name": "Unassigned",
+      "av": "V"
+    },
+    {
+      "value": "30",
+      "name": "Unassigned",
+      "av": "V"
+    },
+    {
+      "value": "31",
+      "name": "H261",
+      "av": "V",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 4587"
+      ]
+    },
+    {
+      "value": "32",
+      "name": "MPV",
+      "av": "V",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 2250"
+      ]
+    },
+    {
+      "value": "33",
+      "name": "MP2T",
+      "av": "AV",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 2250"
+      ]
+    },
+    {
+      "value": "34",
+      "name": "H263",
+      "av": "V",
+      "clock_rate": "90000",
+      "refs": [
+        "Chunrong_Zhu"
+      ]
+    },
+    {
+      "value": "35-71",
+      "name": "Unassigned",
+      "av": "?"
+    },
+    {
+      "value": "72-76",
+      "name": "Reserved for RTCP conflict avoidance",
+      "refs": [
+        "RFC 3551"
+      ]
+    },
+    {
+      "value": "77-95",
+      "name": "Unassigned",
+      "av": "?"
+    },
+    {
+      "value": "96-127",
+      "name": "dynamic",
+      "av": "?",
+      "refs": [
+        "RFC 3551"
+      ]
+    }
+  ],
+  "rtp-parameters-2": [
+    {
+      "type": "application",
+      "subtype": "1d-interleaved-parityfec",
+      "refs": [
+        "RFC 6015"
+      ]
+    },
+    {
+      "type": "application",
+      "subtype": "flexfec",
+      "clock_rate": "",
+      "channels": "",
+      "refs": [
+        "RFC 8627"
+      ]
+    },
+    {
+      "type": "application",
+      "subtype": "h224",
+      "clock_rate": "4800",
+      "refs": [
+        "RFC 4573"
+      ]
+    },
+    {
+      "type": "application",
+      "subtype": "parityfec",
+      "refs": [
+        "RFC 3009"
+      ]
+    },
+    {
+      "type": "application",
+      "subtype": "raptorfec",
+      "refs": [
+        "RFC 6682"
+      ]
+    },
+    {
+      "type": "application",
+      "subtype": "rtx",
+      "refs": [
+        "RFC 4588"
+      ]
+    },
+    {
+      "type": "application",
+      "subtype": "smpte336m",
+      "refs": [
+        "RFC 6597"
+      ]
+    },
+    {
+      "type": "application",
+      "subtype": "ulpfec",
+      "refs": [
+        "RFC 5109"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "1d-interleaved-parityfec",
+      "refs": [
+        "RFC 6015"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "32kadpcm",
+      "clock_rate": "8000",
+      "refs": [
+        "RFC 3802",
+        "RFC 2421"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "ac3",
+      "refs": [
+        "RFC 4184"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "AMR",
+      "clock_rate": "8000",
+      "refs": [
+        "RFC 4867",
+        "RFC 3267"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "AMR-WB",
+      "clock_rate": "16000",
+      "refs": [
+        "RFC 4867",
+        "RFC 3267"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "amr-wb+",
+      "clock_rate": "72000",
+      "refs": [
+        "RFC 4352"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "aptx",
+      "clock_rate": "",
+      "channels": "",
+      "refs": [
+        "RFC 7310"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "ATRAC-ADVANCED-LOSSLESS",
+      "refs": [
+        "RFC 5584"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "atrac-x",
+      "refs": [
+        "RFC 5584"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "atrac3",
+      "clock_rate": "44100",
+      "refs": [
+        "RFC 5584"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "BV16",
+      "clock_rate": "8000",
+      "refs": [
+        "RFC 4298"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "BV32",
+      "clock_rate": "16000",
+      "refs": [
+        "RFC 4298"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "clearmode",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 4040"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "CN",
+      "refs": [
+        "RFC 3389"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "DAT12",
+      "refs": [
+        "RFC 3190"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "dsr-es201108",
+      "refs": [
+        "RFC 3557"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "dsr-es202050",
+      "clock_rate": "8000",
+      "refs": [
+        "RFC 4060"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "dsr-es202211",
+      "clock_rate": "8000",
+      "refs": [
+        "RFC 4060"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "dsr-es202212",
+      "clock_rate": "8000",
+      "refs": [
+        "RFC 4060"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "DV",
+      "refs": [
+        "RFC 6469"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "DVI4",
+      "refs": [
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "eac3",
+      "refs": [
+        "RFC 4598"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRC",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 4788"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRC0",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 4788"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRC1",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 4788"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRCB",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 4788"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRCB0",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 4788"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRCB1",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 4788"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRCNW",
+      "clock_rate": "16000",
+      "channels": "",
+      "refs": [
+        "RFC 6884"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRCNW0",
+      "clock_rate": "16000",
+      "channels": "",
+      "refs": [
+        "RFC 6884"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRCNW1",
+      "clock_rate": "16000",
+      "channels": "",
+      "refs": [
+        "RFC 6884"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRCWB",
+      "refs": [
+        "RFC 5188"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRCWB0",
+      "refs": [
+        "RFC 5188"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "EVRCWB1",
+      "refs": [
+        "RFC 5188"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "flexfec",
+      "clock_rate": "",
+      "channels": "",
+      "refs": [
+        "RFC 8627"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "fwdred",
+      "refs": [
+        "RFC 6354"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G711-0",
+      "clock_rate": "",
+      "channels": "",
+      "refs": [
+        "RFC 7650"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "g719",
+      "clock_rate": "48000",
+      "refs": [
+        "RFC 5404"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G722",
+      "refs": [
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G7221",
+      "clock_rate": "16000",
+      "channels": "1",
+      "refs": [
+        "RFC 5577"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G723",
+      "refs": [
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G726-16",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551",
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G726-24",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551",
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G726-32",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551",
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G726-40",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551",
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G728",
+      "refs": [
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G729",
+      "refs": [
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G7291",
+      "clock_rate": "16000",
+      "refs": [
+        "RFC 4749",
+        "RFC 5459"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G729D",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551",
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "G729E",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551",
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "GSM",
+      "refs": [
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "GSM-EFR",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3551",
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "GSM-HR-08",
+      "clock_rate": "8000",
+      "refs": [
+        "RFC 5993"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "iLBC",
+      "clock_rate": "8000",
+      "refs": [
+        "RFC 3952"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "ip-mr_v2.5",
+      "clock_rate": "16000",
+      "refs": [
+        "RFC 6262"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "L8",
+      "refs": [
+        "RFC 3551",
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "L16",
+      "refs": [
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "L20",
+      "refs": [
+        "RFC 3190"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "L24",
+      "refs": [
+        "RFC 3190"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "LPC",
+      "refs": [
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "MELP",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 8130"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "MELP600",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 8130"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "MELP1200",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 8130"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "MELP2400",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 8130"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "MP4A-LATM",
+      "refs": [
+        "RFC 6416"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "MPA",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 3555"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "mpa-robust",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 5219"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "mpeg4-generic",
+      "refs": [
+        "RFC 3640",
+        "RFC 5691",
+        "RFC 6295"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "opus",
+      "clock_rate": "48000",
+      "channels": "",
+      "refs": [
+        "RFC 7587"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "parityfec",
+      "refs": [
+        "RFC 5109"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "PCMA",
+      "refs": [
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "PCMA-WB",
+      "clock_rate": "16000",
+      "refs": [
+        "RFC 5391"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "PCMU",
+      "refs": [
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "PCMU-WB",
+      "clock_rate": "16000",
+      "refs": [
+        "RFC 5391"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "QCELP",
+      "refs": [
+        "RFC 3555"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "raptorfec",
+      "refs": [
+        "RFC 6682"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "RED",
+      "refs": [
+        "RFC 2198",
+        "RFC 3555"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "rtp-midi",
+      "refs": [
+        "RFC 6295"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "rtx",
+      "refs": [
+        "RFC 4588"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "scip",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "SCIP",
+        "Michael_Faller",
+        "Daniel_Hanson"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "SMV",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3558"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "SMV0",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 3558"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "speex",
+      "refs": [
+        "RFC 5574"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "t140c",
+      "refs": [
+        "RFC 4351"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "t38",
+      "refs": [
+        "RFC 4612"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "telephone-event",
+      "refs": [
+        "RFC 4733"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "tone",
+      "refs": [
+        "RFC 4733"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "TSVCIS",
+      "clock_rate": "8000",
+      "channels": "1",
+      "refs": [
+        "RFC 8817"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "uemclip",
+      "refs": [
+        "RFC 5686"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "ulpfec",
+      "refs": [
+        "RFC 5109"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "VDVI",
+      "channels": "1",
+      "refs": [
+        "RFC 3551",
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "VMR-WB",
+      "clock_rate": "16000",
+      "refs": [
+        "RFC 4348",
+        "RFC 4424"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "vorbis",
+      "refs": [
+        "RFC 5215"
+      ]
+    },
+    {
+      "type": "audio",
+      "subtype": "vorbis-config",
+      "refs": [
+        "RFC 5215"
+      ]
+    },
+    {
+      "type": "text",
+      "subtype": "1d-interleaved-parityfec",
+      "refs": [
+        "RFC 6015"
+      ]
+    },
+    {
+      "type": "text",
+      "subtype": "flexfec",
+      "clock_rate": "",
+      "channels": "",
+      "refs": [
+        "RFC 8627"
+      ]
+    },
+    {
+      "type": "text",
+      "subtype": "fwdred",
+      "refs": [
+        "RFC 6354"
+      ]
+    },
+    {
+      "type": "text",
+      "subtype": "parityfec",
+      "refs": [
+        "RFC 3009"
+      ]
+    },
+    {
+      "type": "text",
+      "subtype": "raptorfec",
+      "refs": [
+        "RFC 6682"
+      ]
+    },
+    {
+      "type": "text",
+      "subtype": "red",
+      "clock_rate": "1000",
+      "refs": [
+        "RFC 4102"
+      ]
+    },
+    {
+      "type": "text",
+      "subtype": "rtx",
+      "refs": [
+        "RFC 4588"
+      ]
+    },
+    {
+      "type": "text",
+      "subtype": "t140",
+      "clock_rate": "1000",
+      "refs": [
+        "RFC 4103"
+      ]
+    },
+    {
+      "type": "text",
+      "subtype": "ttml+xml",
+      "clock_rate": "",
+      "channels": "",
+      "refs": [
+        "RFC 8759"
+      ]
+    },
+    {
+      "type": "text",
+      "subtype": "ulpfec",
+      "refs": [
+        "RFC 5109"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "BMPEG",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 2343",
+        "RFC 3555"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "1d-interleaved-parityfec",
+      "refs": [
+        "RFC 6015"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "3gpp-tt",
+      "refs": [
+        "RFC 4396"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "AV1",
+      "clock_rate": "90000",
+      "channels": "",
+      "refs": [
+        "https://www.iana.org/assignments/media-types/video/AV1"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "BT656",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 2431",
+        "RFC 3555"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "celB",
+      "refs": [
+        "RFC 3555"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "DV",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 6469"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "EVC",
+      "clock_rate": "90000",
+      "channels": "",
+      "refs": [
+        "RFC 9584"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "flexfec",
+      "clock_rate": "",
+      "channels": "",
+      "refs": [
+        "RFC 8627"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "H261",
+      "refs": [
+        "RFC 4587"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "H263",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 4628"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "H263-1998",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 4629"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "H263-2000",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 4629"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "H264",
+      "refs": [
+        "RFC 6184"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "H264-RCDO",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 6185"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "H264-SVC",
+      "refs": [
+        "RFC 6190"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "HEVC",
+      "clock_rate": "90000",
+      "channels": "",
+      "refs": [
+        "RFC 7798"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "JPEG",
+      "refs": [
+        "RFC 3555"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "JPEG2000",
+      "refs": [
+        "RFC 5371"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "jxsv",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC-ietf-avtcore-rtp-jpegxs-3ed-08"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "MP1S",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 2250",
+        "RFC 3555"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "MP2P",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 2250",
+        "RFC 3555"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "MP2T",
+      "refs": [
+        "RFC 3555"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "MP4V-ES",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 6416"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "mpeg4-generic",
+      "refs": [
+        "RFC 3640"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "MPV",
+      "refs": [
+        "RFC 3555"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "nv",
+      "refs": [
+        "RFC 4856"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "parityfec",
+      "refs": [
+        "RFC 5109"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "pointer",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 2862"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "raptorfec",
+      "refs": [
+        "RFC 6682"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "raw",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 4175"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "rtx",
+      "refs": [
+        "RFC 4588"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "scip",
+      "clock_rate": "90000",
+      "channels": "1",
+      "refs": [
+        "SCIP",
+        "Michael_Faller",
+        "Daniel_Hanson"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "smpte291",
+      "clock_rate": "",
+      "channels": "",
+      "refs": [
+        "RFC 8331"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "SMPTE292M",
+      "refs": [
+        "RFC 3497"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "ulpfec",
+      "refs": [
+        "RFC 5109"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "vc1",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 4425"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "vc2",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 8450"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "VP8",
+      "clock_rate": "90000",
+      "channels": "",
+      "refs": [
+        "RFC 7741"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "VP9",
+      "clock_rate": "90000",
+      "refs": [
+        "RFC 9628"
+      ]
+    },
+    {
+      "type": "video",
+      "subtype": "VVC",
+      "clock_rate": "90000",
+      "channels": "",
+      "refs": [
+        "RFC 9328"
+      ]
+    }
+  ],
+  "rtp-parameters-4": [
+    {
+      "value": "0",
+      "name": "Reserved"
+    },
+    {
+      "value": "1-191",
+      "name": "Unassigned"
+    },
+    {
+      "value": "192",
+      "name": "Reserved (Historic-FIR)",
+      "refs": [
+        "RFC 2032"
+      ]
+    },
+    {
+      "value": "193",
+      "name": "Reserved (Historic-NACK)",
+      "refs": [
+        "RFC 2032"
+      ]
+    },
+    {
+      "value": "194",
+      "abbrev": "SMPTETC",
+      "name": "SMPTE time-code mapping",
+      "refs": [
+        "RFC 5484"
+      ]
+    },
+    {
+      "value": "195",
+      "abbrev": "IJ",
+      "name": "Extended inter-arrival jitter report",
+      "refs": [
+        "RFC 5450"
+      ]
+    },
+    {
+      "value": "196-199",
+      "name": "Unassigned"
+    },
+    {
+      "value": "200",
+      "abbrev": "SR",
+      "name": "sender report",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "201",
+      "abbrev": "RR",
+      "name": "receiver report",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "202",
+      "abbrev": "SDES",
+      "name": "source description",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "203",
+      "abbrev": "BYE",
+      "name": "goodbye",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "204",
+      "abbrev": "APP",
+      "name": "application-defined",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "205",
+      "abbrev": "RTPFB",
+      "name": "Generic RTP Feedback",
+      "refs": [
+        "RFC 4585"
+      ]
+    },
+    {
+      "value": "206",
+      "abbrev": "PSFB",
+      "name": "Payload-specific",
+      "refs": [
+        "RFC 4585"
+      ]
+    },
+    {
+      "value": "207",
+      "abbrev": "XR",
+      "name": "extended report",
+      "refs": [
+        "RFC 3611"
+      ]
+    },
+    {
+      "value": "208",
+      "abbrev": "AVB",
+      "name": "AVB RTCP packet",
+      "refs": [
+        "https://standards.ieee.org/ieee/1733/4748/"
+      ]
+    },
+    {
+      "value": "209",
+      "abbrev": "RSI",
+      "name": "Receiver Summary Information",
+      "refs": [
+        "RFC 5760"
+      ]
+    },
+    {
+      "value": "210",
+      "abbrev": "TOKEN",
+      "name": "Port Mapping",
+      "refs": [
+        "RFC 6284"
+      ]
+    },
+    {
+      "value": "211",
+      "abbrev": "IDMS",
+      "name": "IDMS Settings",
+      "refs": [
+        "RFC 7272"
+      ]
+    },
+    {
+      "value": "212",
+      "abbrev": "RGRS",
+      "name": "Reporting Group Reporting Sources",
+      "refs": [
+        "RFC 8861"
+      ]
+    },
+    {
+      "value": "213",
+      "abbrev": "SNM",
+      "name": "Splicing Notification Message",
+      "refs": [
+        "RFC 8286"
+      ]
+    },
+    {
+      "value": "214-254",
+      "name": "Unassigned"
+    },
+    {
+      "value": "255",
+      "name": "Reserved"
+    }
+  ],
+  "rtp-parameters-5": [
+    {
+      "value": "0",
+      "abbrev": "END",
+      "name": "end of SDES list",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "1",
+      "abbrev": "CNAME",
+      "name": "canonical name",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "2",
+      "abbrev": "NAME",
+      "name": "user name",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "3",
+      "abbrev": "EMAIL",
+      "name": "user's electronic mail address",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "4",
+      "abbrev": "PHONE",
+      "name": "user's phone number",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "5",
+      "abbrev": "LOC",
+      "name": "geographic user location",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "6",
+      "abbrev": "TOOL",
+      "name": "name of application or tool",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "7",
+      "abbrev": "NOTE",
+      "name": "notice about the source",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "8",
+      "abbrev": "PRIV",
+      "name": "private extensions",
+      "refs": [
+        "RFC 3550"
+      ]
+    },
+    {
+      "value": "9",
+      "abbrev": "H323-CADDR",
+      "name": "H.323 callable address",
+      "refs": [
+        "Vineet_Kumar"
+      ]
+    },
+    {
+      "value": "10",
+      "abbrev": "APSI",
+      "name": "Application Specific Identifier",
+      "refs": [
+        "RFC 6776"
+      ]
+    },
+    {
+      "value": "11",
+      "abbrev": "RGRP",
+      "name": "Reporting Group Identifier",
+      "refs": [
+        "RFC 8861"
+      ]
+    },
+    {
+      "value": "12",
+      "abbrev": "RtpStreamId",
+      "name": "RTP Stream Identifier",
+      "refs": [
+        "RFC 8852"
+      ]
+    },
+    {
+      "value": "13",
+      "abbrev": "RepairedRtpStreamId",
+      "name": "Repaired RTP Stream Identifier",
+      "refs": [
+        "RFC 8852"
+      ]
+    },
+    {
+      "value": "14",
+      "abbrev": "CCID",
+      "name": "CLUE CaptId",
+      "refs": [
+        "RFC 8849"
+      ]
+    },
+    {
+      "value": "15",
+      "abbrev": "MID",
+      "name": "Media Identification",
+      "refs": [
+        "RFC 9143"
+      ]
+    },
+    {
+      "value": "16-255",
+      "name": "Unassigned"
+    }
+  ],
+  "rtp-parameters-8": [
+    {
+      "value": "1",
+      "name": "Generic NACK",
+      "long_name": "Generic negative acknowledgement",
+      "refs": [
+        "RFC 4585"
+      ]
+    },
+    {
+      "value": "2",
+      "long_name": "Reserved",
+      "refs": [
+        "RFC 5104"
+      ]
+    },
+    {
+      "value": "3",
+      "name": "TMMBR",
+      "long_name": "Temporary Maximum Media Stream Bit Rate Request",
+      "refs": [
+        "RFC 5104"
+      ]
+    },
+    {
+      "value": "4",
+      "name": "TMMBN",
+      "long_name": "Temporary Maximum Media Stream Bit Rate Notification",
+      "refs": [
+        "RFC 5104"
+      ]
+    },
+    {
+      "value": "5",
+      "name": "RTCP-SR-REQ",
+      "long_name": "RTCP Rapid Resynchronisation Request",
+      "refs": [
+        "RFC 6051"
+      ]
+    },
+    {
+      "value": "6",
+      "name": "RAMS",
+      "long_name": "Rapid Acquisition of Multicast Sessions",
+      "refs": [
+        "RFC 6285"
+      ]
+    },
+    {
+      "value": "7",
+      "name": "TLLEI",
+      "long_name": "Transport-Layer Third-Party Loss Early Indication",
+      "refs": [
+        "RFC 6642"
+      ]
+    },
+    {
+      "value": "8",
+      "name": "RTCP-ECN-FB",
+      "long_name": "RTCP ECN Feedback",
+      "refs": [
+        "RFC 6679"
+      ]
+    },
+    {
+      "value": "9",
+      "name": "PAUSE-RESUME",
+      "long_name": "Media Pause/Resume",
+      "refs": [
+        "RFC 7728"
+      ]
+    },
+    {
+      "value": "10",
+      "name": "DBI",
+      "long_name": "Delay Budget Information (DBI)",
+      "refs": [
+        "https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=1404",
+        "Ozgur_Oyman"
+      ]
+    },
+    {
+      "value": "11",
+      "name": "CCFB",
+      "long_name": "RTP Congestion Control Feedback",
+      "refs": [
+        "RFC 8888"
+      ]
+    },
+    {
+      "value": "12-30",
+      "long_name": "Unassigned"
+    },
+    {
+      "value": "31",
+      "name": "Extension",
+      "long_name": "Reserved for future extensions",
+      "refs": [
+        "RFC 4585"
+      ]
+    }
+  ],
+  "rtp-parameters-9": [
+    {
+      "value": "1",
+      "name": "PLI",
+      "long_name": "Picture Loss Indication",
+      "refs": [
+        "RFC 4585"
+      ]
+    },
+    {
+      "value": "2",
+      "name": "SLI",
+      "long_name": "Slice Loss Indication",
+      "refs": [
+        "RFC 4585"
+      ]
+    },
+    {
+      "value": "3",
+      "name": "RPSI",
+      "long_name": "Reference Picture Selection Indication",
+      "refs": [
+        "RFC 4585"
+      ]
+    },
+    {
+      "value": "4",
+      "name": "FIR",
+      "long_name": "Full Intra Request Command",
+      "refs": [
+        "RFC 5104"
+      ]
+    },
+    {
+      "value": "5",
+      "name": "TSTR",
+      "long_name": "Temporal-Spatial Trade-off Request",
+      "refs": [
+        "RFC 5104"
+      ]
+    },
+    {
+      "value": "6",
+      "name": "TSTN",
+      "long_name": "Temporal-Spatial Trade-off Notification",
+      "refs": [
+        "RFC 5104"
+      ]
+    },
+    {
+      "value": "7",
+      "name": "VBCM",
+      "long_name": "Video Back Channel Message",
+      "refs": [
+        "RFC 5104"
+      ]
+    },
+    {
+      "value": "8",
+      "name": "PSLEI",
+      "long_name": "Payload-Specific Third-Party Loss Early Indication",
+      "refs": [
+        "RFC 6642"
+      ]
+    },
+    {
+      "value": "9",
+      "name": "ROI",
+      "long_name": "Video region-of-interest (ROI)",
+      "refs": [
+        "https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=1404",
+        "Ozgur_Oyman"
+      ]
+    },
+    {
+      "value": "10",
+      "name": "LRR",
+      "long_name": "Layer Refresh Request Command",
+      "refs": [
+        "RFC 9627"
+      ]
+    },
+    {
+      "value": "11",
+      "name": "VP",
+      "long_name": "Viewport (VP)",
+      "refs": [
+        "https://www.3gpp.org/ftp/Specs/archive/26_series/26.114"
+      ]
+    },
+    {
+      "value": "12",
+      "name": "TSRR",
+      "long_name": "Temporal-Spatial Resolution Request",
+      "refs": [
+        "RFC-ietf-avtcore-rtcp-green-metadata-17"
+      ]
+    },
+    {
+      "value": "13",
+      "name": "TSRN",
+      "long_name": "Temporal-Spatial Resolution Notification",
+      "refs": [
+        "RFC-ietf-avtcore-rtcp-green-metadata-17"
+      ]
+    },
+    {
+      "value": "14",
+      "long_name": "Unassigned"
+    },
+    {
+      "value": "15",
+      "name": "AFB",
+      "long_name": "Application Layer Feedback",
+      "refs": [
+        "RFC 4585"
+      ]
+    },
+    {
+      "value": "16-30",
+      "long_name": "Unassigned"
+    },
+    {
+      "value": "31",
+      "name": "Extension",
+      "long_name": "Reserved for future extensions",
+      "refs": [
+        "RFC 4585"
+      ]
+    }
+  ],
+  "stun-parameters-2": [
+    {
+      "value": "0x000",
+      "description": "Reserved",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x001",
+      "description": "Binding",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x002",
+      "description": "Reserved; was SharedSecret prior to RFC 5389",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x003",
+      "description": "Allocate",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x004",
+      "description": "Refresh",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x005",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0x006",
+      "description": "Send",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x007",
+      "description": "Data",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x008",
+      "description": "CreatePermission",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x009",
+      "description": "ChannelBind",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x00A",
+      "description": "Connect",
+      "refs": [
+        "RFC 6062"
+      ]
+    },
+    {
+      "value": "0x00B",
+      "description": "ConnectionBind",
+      "refs": [
+        "RFC 6062"
+      ]
+    },
+    {
+      "value": "0x00C",
+      "description": "ConnectionAttempt",
+      "refs": [
+        "RFC 6062"
+      ]
+    },
+    {
+      "value": "0x00D-0x07F",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0x080",
+      "description": "GOOG-PING",
+      "refs": [
+        "Jonas_Oreland"
+      ]
+    },
+    {
+      "value": "0x081-0x0FF",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0x100-0xFFF",
+      "description": "Reserved (For DTLS-SRTP multiplexing collision avoidance, see RFC 7983. Cannot be made available for assignment without IETF Review.)",
+      "refs": [
+        "RFC 7983"
+      ]
+    }
+  ],
+  "stun-parameters-4": [
+    {
+      "value": "0x0000",
+      "description": "Reserved",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x0001",
+      "description": "MAPPED-ADDRESS",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x0002",
+      "description": "Reserved; was RESPONSE-ADDRESS prior to RFC 5389",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x0003",
+      "description": "Reserved; was CHANGE-REQUEST prior to RFC 5389",
+      "refs": [
+        "RFC 5780",
+        "4233"
+      ]
+    },
+    {
+      "value": "0x0004",
+      "description": "Reserved; was SOURCE-ADDRESS prior to RFC 5389",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x0005",
+      "description": "Reserved; was CHANGED-ADDRESS prior to RFC 5389",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x0006",
+      "description": "USERNAME",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x0007",
+      "description": "Reserved; was PASSWORD prior to RFC 5389",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x0008",
+      "description": "MESSAGE-INTEGRITY",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x0009",
+      "description": "ERROR-CODE",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x000A",
+      "description": "UNKNOWN-ATTRIBUTES",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x000B",
+      "description": "Reserved; was REFLECTED-FROM prior to RFC 5389",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x000C",
+      "description": "CHANNEL-NUMBER",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x000D",
+      "description": "LIFETIME",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x000E-0x000F",
+      "description": "Reserved"
+    },
+    {
+      "value": "0x0010",
+      "description": "Reserved (was BANDWIDTH)",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x0011",
+      "description": "Reserved"
+    },
+    {
+      "value": "0x0012",
+      "description": "XOR-PEER-ADDRESS",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x0013",
+      "description": "DATA",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x0014",
+      "description": "REALM",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x0015",
+      "description": "NONCE",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x0016",
+      "description": "XOR-RELAYED-ADDRESS",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x0017",
+      "description": "REQUESTED-ADDRESS-FAMILY",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x0018",
+      "description": "EVEN-PORT",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x0019",
+      "description": "REQUESTED-TRANSPORT",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x001A",
+      "description": "DONT-FRAGMENT",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x001B",
+      "description": "ACCESS-TOKEN",
+      "refs": [
+        "RFC 7635"
+      ]
+    },
+    {
+      "value": "0x001C",
+      "description": "MESSAGE-INTEGRITY-SHA256",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x001D",
+      "description": "PASSWORD-ALGORITHM",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x001E",
+      "description": "USERHASH",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x001F-0x001F",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0x0020",
+      "description": "XOR-MAPPED-ADDRESS",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x0021",
+      "description": "Reserved (was TIMER-VAL)",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x0022",
+      "description": "RESERVATION-TOKEN",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x0023",
+      "description": "Reserved"
+    },
+    {
+      "value": "0x0024",
+      "description": "PRIORITY",
+      "refs": [
+        "RFC 8445"
+      ]
+    },
+    {
+      "value": "0x0025",
+      "description": "USE-CANDIDATE",
+      "refs": [
+        "RFC 8445"
+      ]
+    },
+    {
+      "value": "0x0026",
+      "description": "PADDING",
+      "refs": [
+        "RFC 5780"
+      ]
+    },
+    {
+      "value": "0x0027",
+      "description": "RESPONSE-PORT",
+      "refs": [
+        "RFC 5780"
+      ]
+    },
+    {
+      "value": "0x0028-0x0029",
+      "description": "Reserved"
+    },
+    {
+      "value": "0x002A",
+      "description": "CONNECTION-ID",
+      "refs": [
+        "RFC 6062"
+      ]
+    },
+    {
+      "value": "0x002B-0x002F",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0x0030",
+      "description": "Reserved"
+    },
+    {
+      "value": "0x0031-0x7FFF",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0x8000",
+      "description": "ADDITIONAL-ADDRESS-FAMILY",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x8001",
+      "description": "ADDRESS-ERROR-CODE",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x8002",
+      "description": "PASSWORD-ALGORITHMS",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x8003",
+      "description": "ALTERNATE-DOMAIN",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x8004",
+      "description": "ICMP",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "0x8005-0x8021",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0x8022",
+      "description": "SOFTWARE",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x8023",
+      "description": "ALTERNATE-SERVER",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x8024",
+      "description": "Reserved"
+    },
+    {
+      "value": "0x8025",
+      "description": "TRANSACTION_TRANSMIT_COUNTER",
+      "refs": [
+        "RFC 7982"
+      ]
+    },
+    {
+      "value": "0x8026",
+      "description": "Reserved"
+    },
+    {
+      "value": "0x8027",
+      "description": "CACHE-TIMEOUT",
+      "refs": [
+        "RFC 5780"
+      ]
+    },
+    {
+      "value": "0x8028",
+      "description": "FINGERPRINT",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "0x8029",
+      "description": "ICE-CONTROLLED",
+      "refs": [
+        "RFC 8445"
+      ]
+    },
+    {
+      "value": "0x802A",
+      "description": "ICE-CONTROLLING",
+      "refs": [
+        "RFC 8445"
+      ]
+    },
+    {
+      "value": "0x802B",
+      "description": "RESPONSE-ORIGIN",
+      "refs": [
+        "RFC 5780"
+      ]
+    },
+    {
+      "value": "0x802C",
+      "description": "OTHER-ADDRESS",
+      "refs": [
+        "RFC 5780"
+      ]
+    },
+    {
+      "value": "0x802D",
+      "description": "ECN-CHECK STUN",
+      "refs": [
+        "RFC 6679"
+      ]
+    },
+    {
+      "value": "0x802E",
+      "description": "THIRD-PARTY-AUTHORIZATION",
+      "refs": [
+        "RFC 7635"
+      ]
+    },
+    {
+      "value": "0x802F",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0x8030",
+      "description": "MOBILITY-TICKET",
+      "refs": [
+        "RFC 8016"
+      ]
+    },
+    {
+      "value": "0x8031-0xBFFF",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0xC000",
+      "description": "CISCO-STUN-FLOWDATA",
+      "refs": [
+        "Dan_Wing"
+      ]
+    },
+    {
+      "value": "0xC001",
+      "description": "ENF-FLOW-DESCRIPTION",
+      "refs": [
+        "Pål_Erik_Martinsen"
+      ]
+    },
+    {
+      "value": "0xC002",
+      "description": "ENF-NETWORK-STATUS",
+      "refs": [
+        "Pål_Erik_Martinsen"
+      ]
+    },
+    {
+      "value": "0xC003",
+      "description": "CISCO-WEBEX-FLOW-INFO",
+      "refs": [
+        "Stefano_Giorcelli"
+      ]
+    },
+    {
+      "value": "0xC004-0xC055",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0xC056",
+      "description": "CITRIX-TRANSACTION-ID",
+      "refs": [
+        "Paras_Babbar"
+      ]
+    },
+    {
+      "value": "0xC057",
+      "description": "GOOG-NETWORK-INFO",
+      "refs": [
+        "Jonas_Oreland"
+      ]
+    },
+    {
+      "value": "0xC058",
+      "description": "GOOG-LAST-ICE-CHECK-RECEIVED",
+      "refs": [
+        "Jonas_Oreland"
+      ]
+    },
+    {
+      "value": "0xC059",
+      "description": "GOOG-MISC-INFO",
+      "refs": [
+        "Jonas_Oreland"
+      ]
+    },
+    {
+      "value": "0xC05A",
+      "description": "GOOG-OBSOLETE-1",
+      "refs": [
+        "Jonas_Oreland"
+      ]
+    },
+    {
+      "value": "0xC05B",
+      "description": "GOOG-CONNECTION-ID",
+      "refs": [
+        "Jonas_Oreland"
+      ]
+    },
+    {
+      "value": "0xC05C",
+      "description": "GOOG-DELTA",
+      "refs": [
+        "Jonas_Oreland"
+      ]
+    },
+    {
+      "value": "0xC05D",
+      "description": "GOOG-DELTA-ACK",
+      "refs": [
+        "Jonas_Oreland"
+      ]
+    },
+    {
+      "value": "0xC05E",
+      "description": "GOOG-DELTA-SYNC-REQ",
+      "refs": [
+        "Jonas_Oreland"
+      ]
+    },
+    {
+      "value": "0xC05F",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0xC060",
+      "description": "GOOG-MESSAGE-INTEGRITY-32",
+      "refs": [
+        "Jonas_Oreland"
+      ]
+    },
+    {
+      "value": "0xC061-0xC06F",
+      "description": "Unassigned"
+    },
+    {
+      "value": "0xC070",
+      "description": "META-DTLS-IN-STUN",
+      "refs": [
+        "Philipp_Hancke"
+      ]
+    },
+    {
+      "value": "0xC071",
+      "description": "META-DTLS-IN-STUN-ACKNOWLEDGEMENT",
+      "refs": [
+        "Philipp_Hancke"
+      ]
+    },
+    {
+      "value": "0xC072-0xFFFF",
+      "description": "Unassigned"
+    }
+  ],
+  "stun-parameters-6": [
+    {
+      "value": "0-299",
+      "description": "Reserved"
+    },
+    {
+      "value": "300",
+      "description": "Try Alternate",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "301-399",
+      "description": "Unassigned"
+    },
+    {
+      "value": "400",
+      "description": "Bad Request",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "401",
+      "description": "Unauthenticated",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "402",
+      "description": "Unassigned"
+    },
+    {
+      "value": "403",
+      "description": "Forbidden",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "404",
+      "description": "Unassigned"
+    },
+    {
+      "value": "405",
+      "description": "Mobility Forbidden",
+      "refs": [
+        "RFC 8016"
+      ]
+    },
+    {
+      "value": "406-419",
+      "description": "Unassigned"
+    },
+    {
+      "value": "420",
+      "description": "Unknown Attribute",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "421-436",
+      "description": "Unassigned"
+    },
+    {
+      "value": "437",
+      "description": "Allocation Mismatch",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "438",
+      "description": "Stale Nonce",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "439",
+      "description": "Unassigned"
+    },
+    {
+      "value": "440",
+      "description": "Address Family not Supported",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "441",
+      "description": "Wrong Credentials",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "442",
+      "description": "Unsupported Transport Protocol",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "443",
+      "description": "Peer Address Family Mismatch",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "444-445",
+      "description": "Unassigned"
+    },
+    {
+      "value": "446",
+      "description": "Connection Already Exists",
+      "refs": [
+        "RFC 6062"
+      ]
+    },
+    {
+      "value": "447",
+      "description": "Connection Timeout or Failure",
+      "refs": [
+        "RFC 6062"
+      ]
+    },
+    {
+      "value": "448-485",
+      "description": "Unassigned"
+    },
+    {
+      "value": "486",
+      "description": "Allocation Quota Reached",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "487",
+      "description": "Role Conflict",
+      "refs": [
+        "RFC 8445"
+      ]
+    },
+    {
+      "value": "488-499",
+      "description": "Unassigned"
+    },
+    {
+      "value": "500",
+      "description": "Server Error",
+      "refs": [
+        "RFC 8489"
+      ]
+    },
+    {
+      "value": "501-507",
+      "description": "Unassigned"
+    },
+    {
+      "value": "508",
+      "description": "Insufficient Capacity",
+      "refs": [
+        "RFC 8656"
+      ]
+    },
+    {
+      "value": "509-699",
+      "description": "Unassigned"
+    }
+  ],
+  "rtcp-xr-block-types-1": [
+    {
+      "value": "1",
+      "name": "Loss RLE Report Block",
+      "refs": [
+        "RFC 3611"
+      ]
+    },
+    {
+      "value": "2",
+      "name": "Duplicate RLE Report Block",
+      "refs": [
+        "RFC 3611"
+      ]
+    },
+    {
+      "value": "3",
+      "name": "Packet Receipt Times Report Block",
+      "refs": [
+        "RFC 3611"
+      ]
+    },
+    {
+      "value": "4",
+      "name": "Receiver Reference Time Report Block",
+      "refs": [
+        "RFC 3611"
+      ]
+    },
+    {
+      "value": "5",
+      "name": "DLRR Report Block",
+      "refs": [
+        "RFC 3611"
+      ]
+    },
+    {
+      "value": "6",
+      "name": "Statistics Summary Report Block",
+      "refs": [
+        "RFC 3611"
+      ]
+    },
+    {
+      "value": "7",
+      "name": "VoIP Metrics Report Block",
+      "refs": [
+        "RFC 3611"
+      ]
+    },
+    {
+      "value": "8",
+      "name": "RTCP XR",
+      "refs": [
+        "RFC 5093"
+      ]
+    },
+    {
+      "value": "9",
+      "name": "Texas Instruments Extended VoIP Quality Block",
+      "refs": [
+        "http://focus.ti.com/general/docs/bcg/bcgdoccenter.tsp?templateId=6116&navigationId=12078#42",
+        "David_Lide"
+      ]
+    },
+    {
+      "value": "10",
+      "name": "Post-repair Loss RLE Report Block",
+      "refs": [
+        "RFC 5725"
+      ]
+    },
+    {
+      "value": "11",
+      "name": "Multicast Acquisition Report Block",
+      "refs": [
+        "RFC 6332"
+      ]
+    },
+    {
+      "value": "12",
+      "name": "IDMS Report Block",
+      "refs": [
+        "RFC 7272"
+      ]
+    },
+    {
+      "value": "13",
+      "name": "ECN Summary Report",
+      "refs": [
+        "RFC 6679"
+      ]
+    },
+    {
+      "value": "14",
+      "name": "Measurement Information Block",
+      "refs": [
+        "RFC 6776"
+      ]
+    },
+    {
+      "value": "15",
+      "name": "Packet Delay Variation Metrics Block",
+      "refs": [
+        "RFC 6798"
+      ]
+    },
+    {
+      "value": "16",
+      "name": "Delay Metrics Block",
+      "refs": [
+        "RFC 6843"
+      ]
+    },
+    {
+      "value": "17",
+      "name": "Burst/Gap Loss Summary Statistics Block",
+      "refs": [
+        "RFC 7004"
+      ]
+    },
+    {
+      "value": "18",
+      "name": "Burst/Gap Discard Summary Statistics Block",
+      "refs": [
+        "RFC 7004"
+      ]
+    },
+    {
+      "value": "19",
+      "name": "Frame Impairment Statistics Summary",
+      "refs": [
+        "RFC 7004"
+      ]
+    },
+    {
+      "value": "20",
+      "name": "Burst/Gap Loss Metrics Block",
+      "refs": [
+        "RFC 6958"
+      ]
+    },
+    {
+      "value": "21",
+      "name": "Burst/Gap Discard Metrics Block",
+      "refs": [
+        "RFC 7003",
+        "3735"
+      ]
+    },
+    {
+      "value": "22",
+      "name": "MPEG2 Transport Stream PSI-Independent Decodability Statistics Metrics Block",
+      "refs": [
+        "RFC 6990"
+      ]
+    },
+    {
+      "value": "23",
+      "name": "De-Jitter Buffer Metrics Block",
+      "refs": [
+        "RFC 7005"
+      ]
+    },
+    {
+      "value": "24",
+      "name": "Discard Count Metrics Block",
+      "refs": [
+        "RFC 7002"
+      ]
+    },
+    {
+      "value": "25",
+      "name": "DRLE (Discard RLE Report)",
+      "refs": [
+        "RFC 7097"
+      ]
+    },
+    {
+      "value": "26",
+      "name": "BDR (Bytes Discarded Report)",
+      "refs": [
+        "RFC 7243"
+      ]
+    },
+    {
+      "value": "27",
+      "name": "RFISD (RTP Flows Initial Synchronization Delay)",
+      "refs": [
+        "RFC 7244"
+      ]
+    },
+    {
+      "value": "28",
+      "name": "RFSO (RTP Flows Synchronization Offset Metrics Block)",
+      "refs": [
+        "RFC 7244"
+      ]
+    },
+    {
+      "value": "29",
+      "name": "MOS Metrics Block",
+      "refs": [
+        "RFC 7266"
+      ]
+    },
+    {
+      "value": "30",
+      "name": "LCB (Loss Concealment Metrics Block)",
+      "refs": [
+        "RFC 7294"
+      ]
+    },
+    {
+      "value": "31",
+      "name": "CSB (Concealed Seconds Metrics Block)",
+      "refs": [
+        "RFC 7294"
+      ]
+    },
+    {
+      "value": "32",
+      "name": "MPEG2 Transport Stream PSI Decodability Statistics Metrics Block",
+      "refs": [
+        "RFC 7380"
+      ]
+    },
+    {
+      "value": "33",
+      "name": "Post-Repair Loss Count Metrics Report Block",
+      "refs": [
+        "RFC 7509"
+      ]
+    },
+    {
+      "value": "34",
+      "name": "Video Loss Concealment Metric Report Block",
+      "refs": [
+        "RFC 7867"
+      ]
+    },
+    {
+      "value": "35",
+      "name": "Independent Burst/Gap Discard Metrics Block",
+      "refs": [
+        "RFC 8015"
+      ]
+    },
+    {
+      "value": "36",
+      "name": "Timing Information for QoE Metrics Calculation Block",
+      "refs": [
+        "https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=4114",
+        "_3GPP_Specifications_Manager"
+      ]
+    },
+    {
+      "value": "37-254",
+      "name": "Unassigned"
+    },
+    {
+      "value": "255",
+      "name": "Reserved for future extensions",
+      "refs": [
+        "RFC 3611"
+      ]
+    }
+  ]
+}

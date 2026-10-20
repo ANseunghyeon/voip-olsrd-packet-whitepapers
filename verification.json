@@ -1,0 +1,39 @@
+{
+  "checked_date": "2026-10-20",
+  "document_review": {
+    "renderer": "Microsoft Word PDF export and bundled Poppler at 100 dpi",
+    "all_pages_visually_reviewed": true,
+    "total_pages": 68
+  },
+  "packet_validation": {
+    "valid_synthetic_examples": 13,
+    "rejected_malformed_inputs": 3,
+    "pcap_packets": 11,
+    "time_encoding_examples_verified": true,
+    "live_network_transmission": false
+  },
+  "files": {
+    "olsrd_0.6.8_Implementation_Whitepaper_KO.docx": {
+      "sha256": "20d18b132d94c70ab02813464f08e4138b3fae8332c15be62d77e490157f0c82",
+      "bytes": 76482,
+      "paragraph_borders": 0
+    },
+    "olsrd_0.6.8_Implementation_Whitepaper_KO.pdf": {
+      "sha256": "e85d924ce9307bc2ef934a1c3e80c68282fedc72e8f684aa9289c644af9fab90",
+      "bytes": 671414,
+      "pages": 24,
+      "external_links": 28
+    },
+    "VoIP_Standard_Packets_Whitepaper_KO.docx": {
+      "sha256": "5c0abff058d5203311fdc6a82a5ede6427735cc94b4579459317a378f85c6a1d",
+      "bytes": 109833,
+      "paragraph_borders": 0
+    },
+    "VoIP_Standard_Packets_Whitepaper_KO.pdf": {
+      "sha256": "1388ba21977d96c39082fc1c5f2e2464c116bcc2a17339015579734d4cf7c8df",
+      "bytes": 982127,
+      "pages": 44,
+      "external_links": 59
+    }
+  }
+}

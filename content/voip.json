@@ -1,0 +1,1818 @@
+{
+  "title": "VoIP 표준 패킷과 메시지 백서",
+  "subtitle": "호 설정부터 음성 전송과 종료까지의 패킷 구조와 분석 방법",
+  "short_title": "VoIP 표준 패킷과 메시지",
+  "slug": "VoIP_Standard_Packets_Whitepaper_KO",
+  "blocks": [
+    {
+      "type": "title",
+      "text": "VoIP 표준 패킷과 메시지 백서"
+    },
+    {
+      "type": "subtitle",
+      "text": "호 설정부터 음성 전송과 종료까지의 패킷 구조와 분석 방법"
+    },
+    {
+      "type": "p",
+      "text": "발행일 2026년 10월 20일  |  판 1.0  |  언어 한국어"
+    },
+    {
+      "type": "h2",
+      "text": "핵심 내용"
+    },
+    {
+      "type": "p",
+      "text": "VoIP의 송신 트래픽은 호 제어, 세션 기술, 미디어, 품질 제어, NAT 통과, 보안, 관리 프로토콜이 함께 만든다. SIP 요청만 열거해서는 통화의 전체 패킷을 설명할 수 없다. 이 백서는 각 계층의 메시지가 언제 나가고, 상대가 무엇을 응답하며, 캡처에서 어떤 필드를 읽어야 하는지 설명한다."
+    },
+    {
+      "type": "p",
+      "text": "주요 독자는 패킷 분석가와 VoIP 구현 개발자다. SIP 계열의 요청 메서드는 IANA 등록 14종을 모두 설명하고, 응답 코드와 RTP 오디오 미디어 유형, RTCP 패킷 및 피드백 유형은 공식 레지스트리 스냅샷 전체를 부록에 수록한다. [V01, V02]"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "구분",
+        "다루는 범위"
+      ],
+      "rows": [
+        [
+          "호 제어",
+          "SIP 메서드 14종, 응답 전 계열, 인증과 재전송"
+        ],
+        [
+          "미디어",
+          "SDP, RTP, RTCP, DTMF, 무음, 중복과 복구"
+        ],
+        [
+          "경로와 보안",
+          "STUN, TURN, ICE, TLS와 DTLS, SRTP와 SRTCP"
+        ],
+        [
+          "다른 계열",
+          "H.323, H.225.0, H.245, H.248, MGCP와 IAX2의 지위"
+        ],
+        [
+          "검증 자료",
+          "바이트 구조, 통화 순서, 예제, IANA 목록과 원문 링크"
+        ]
+      ],
+      "widths": [
+        3.2,
+        13.6
+      ]
+    },
+    {
+      "type": "p",
+      "text": "읽는 순서는 1장에서 범위와 패킷 식별 원칙을 확인한 뒤 2~8장의 SIP, 9~13장의 미디어, 14~17장의 NAT 및 보안, 18~20장의 연동과 분석 절차를 따라가는 방식이다. 부록 A~I는 메시지 값, 등록된 오디오 형식, STUN과 XR, H.323 계열의 최상위 메시지 선택지를 찾는 색인이다."
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "1 적용 범위와 전체 패킷 분류"
+    },
+    {
+      "type": "p",
+      "text": "VoIP는 음성을 IP로 운반하는 서비스 묶음이며 하나의 고정 헤더를 가진 프로토콜 이름이 아니다. 본문은 IETF SIP와 RTP 계열을 중심으로 한다. H.323과 H.248은 ITU-T 계열의 제어 구조를 별도 장에서 다룬다. 기본 메시지의 종류와 주요 필드까지 설명하며, 모든 ITU-T 부속서, 3GPP 서비스 프로파일, H.248 패키지, 코덱의 모든 비트 조합을 전개하는 명세 대체 문서는 아니다."
+    },
+    {
+      "type": "p",
+      "text": "여기서 모든 종류는 적용 범위의 메시지 유형과 등록값을 빠짐없이 식별할 수 있게 한다는 뜻이다. 프로토콜 확장과 협상값은 계속 늘어날 수 있어, 각 패킷의 가능한 모든 바이트열을 유한 목록으로 만드는 것은 불가능하다. 부록의 기준 시점은 2026년 10월 20일이다."
+    },
+    {
+      "type": "table",
+      "headers": [
+        "계층",
+        "송신되는 대표 형태",
+        "주요 연결 관계"
+      ],
+      "rows": [
+        [
+          "발견과 접속",
+          "DNS 질의, ARP 또는 IPv6 ND, DHCP, TCP 연결",
+          "VoIP 전용 메시지는 아니지만 캡처에 나타남"
+        ],
+        [
+          "호 제어",
+          "SIP 요청과 응답, H.225.0 신호",
+          "호와 대화 상태를 바꿈"
+        ],
+        [
+          "세션 기술",
+          "SDP offer와 answer",
+          "대개 SIP 본문이며 별도 UDP 패킷이 아님"
+        ],
+        [
+          "경로 확보",
+          "STUN, TURN 제어와 ChannelData, ICE 검사",
+          "미디어를 보낼 주소 쌍을 결정"
+        ],
+        [
+          "미디어",
+          "RTP 또는 SRTP, 전화 이벤트와 CN",
+          "협상된 동적 포트로 양방향 전송"
+        ],
+        [
+          "품질과 피드백",
+          "RTCP 또는 SRTCP",
+          "통계, 동기화, 복구와 혼잡 제어"
+        ],
+        [
+          "보안 설정",
+          "TLS 또는 DTLS 레코드, 키 관리",
+          "신호와 미디어의 보안 범위는 별개"
+        ]
+      ],
+      "widths": [
+        2.6,
+        6.5,
+        7.7
+      ]
+    },
+    {
+      "type": "p",
+      "text": "단말에서 나가는 패킷에는 발신 요청뿐 아니라 착신 요청에 대한 응답도 포함된다. 프록시, B2BUA, TURN 서버와 게이트웨이는 각자의 역할에 따라 다른 송신 집합을 가진다. 통화마다 모든 패킷이 반드시 발생하는 것은 아니다."
+    },
+    {
+      "type": "h2",
+      "text": "표준과 등록 상태의 구분"
+    },
+    {
+      "type": "p",
+      "text": "RFC 번호가 있다고 모두 Internet Standard는 아니다. Standards Track, Informational, Experimental, Historic을 구분해야 한다. MGCP의 RFC 3435와 IAX2의 RFC 5456은 Informational이며, 표준 계열과 비교하기 위한 참고 항목으로 표시했다. 독점 SCCP와 제품 전용 확장에는 별도 공개 명세가 필요하다. [V39, V41]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "2 전송 계층과 패킷 식별"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "프로토콜",
+        "기본 식별 단서",
+        "분석할 때의 주의점"
+      ],
+      "rows": [
+        [
+          "SIP",
+          "일반적으로 UDP 또는 TCP 5060, TLS 5061",
+          "명시 URI, DNS와 설정으로 달라질 수 있음"
+        ],
+        [
+          "RTP와 RTCP",
+          "SDP가 지정한 포트와 SSRC",
+          "RTP 고정 포트는 없음"
+        ],
+        [
+          "STUN과 TURN",
+          "일반적으로 3478, 보안 접속 5349",
+          "ICE 검사는 미디어 포트에서도 관찰됨"
+        ],
+        [
+          "H.323",
+          "RAS UDP 1719, 호출 신호 TCP 1720",
+          "H.245는 동적 채널 또는 터널"
+        ],
+        [
+          "MGCP",
+          "통상 게이트웨이 2427, Call Agent 2727",
+          "구성에 따라 목적지 변경"
+        ],
+        [
+          "H.248",
+          "텍스트 2944, 바이너리 2945가 기본 식별 단서",
+          "전송 매핑과 프로파일도 확인"
+        ]
+      ],
+      "widths": [
+        3,
+        6.8,
+        7
+      ]
+    },
+    {
+      "type": "p",
+      "text": "포트 번호만으로 확정하지 않는다. SIP는 시작 줄과 Content-Length, RTP는 버전과 길이 및 SDP 매핑, STUN은 헤더 상위 비트와 magic cookie를 함께 확인한다. TCP에서는 한 SIP 메시지가 여러 세그먼트로 나뉘거나 여러 메시지가 한 세그먼트에 합쳐진다. IP 단편도 애플리케이션 메시지와 동일한 단위가 아니다. [V03, V23]"
+    },
+    {
+      "type": "h2",
+      "text": "같은 포트에서의 구분"
+    },
+    {
+      "type": "p",
+      "text": "RTP와 RTCP는 rtcp-mux로 한 포트를 공유할 수 있다. WebRTC 계열은 STUN, DTLS, TURN ChannelData, RTP/RTCP를 같은 전송 경로에 다중화한다. RFC 7983의 첫 옥텟 분류는 STUN 0~3, DTLS 20~63, TURN ChannelData 64~79, RTP/RTCP 128~191이다. 이 범위는 지정한 다중화 환경에 대한 분류 규칙이며 모든 임의 UDP 데이터의 판정기가 아니다. [V22, V30]"
+    },
+    {
+      "type": "p",
+      "text": "TLS 캡처에서 SIP 시작 줄이 보이지 않거나 SRTP에서 음성이 해독되지 않는 것은 정상일 수 있다. 암호화된 흐름은 인증서, 연결 메타데이터, 협상 로그 및 허가된 복호화 자료를 함께 봐야 한다."
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "3 SIP 공통 메시지 구조"
+    },
+    {
+      "type": "code",
+      "text": "Request-Line = Method SP Request-URI SP SIP/2.0 CRLF\nStatus-Line  = SIP/2.0 SP Status-Code SP Reason-Phrase CRLF\nHeader-Name: value CRLF\n...\nCRLF\n[message body]"
+    },
+    {
+      "type": "p",
+      "text": "SIP는 텍스트 신호 프로토콜이다. 요청은 동작을 지정하며 응답은 해당 요청의 처리 결과를 지정한다. 본문은 SDP 외에도 이벤트, 문자 메시지, XML, multipart 등일 수 있다. Content-Type으로 형식을 구별하며 Content-Length는 본문의 옥텟 수다. 한글 문자 수와 바이트 수가 다르므로 문자 수로 계산하면 안 된다. [V03]"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "필드",
+        "역할",
+        "캡처에서 확인할 값"
+      ],
+      "rows": [
+        [
+          "Via",
+          "거쳐 온 전송 경로와 트랜잭션 식별",
+          "branch, sent-by, received, rport"
+        ],
+        [
+          "From과 To",
+          "논리적 발신자와 수신자",
+          "URI와 tag"
+        ],
+        [
+          "Call-ID",
+          "호 관련 메시지의 공통 식별값",
+          "B2BUA를 넘으면 바뀔 수 있음"
+        ],
+        [
+          "CSeq",
+          "요청 순서와 메서드",
+          "숫자와 메서드를 함께 비교"
+        ],
+        [
+          "Max-Forwards",
+          "신호 루프의 홉 제한",
+          "프록시 통과 시 감소"
+        ],
+        [
+          "Contact",
+          "다음 요청의 목적지와 등록 위치",
+          "SDP 미디어 주소와 구분"
+        ],
+        [
+          "Route와 Record-Route",
+          "대화 안에서의 프록시 경로",
+          "순서와 lr 매개변수"
+        ],
+        [
+          "Content-Type과 Length",
+          "본문 형식과 프레이밍",
+          "빈 본문도 길이 명시가 필요할 수 있음"
+        ],
+        [
+          "Supported와 Require",
+          "지원 확장과 필수 확장",
+          "미지원 필수 확장은 420 등으로 거절"
+        ]
+      ],
+      "widths": [
+        4.4,
+        5.4,
+        7
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "트랜잭션과 대화"
+    },
+    {
+      "type": "p",
+      "text": "트랜잭션은 요청과 그에 대한 응답 처리 단위다. 대화는 Call-ID, 로컬 tag, 원격 tag로 구별하는 지속 관계다. REGISTER는 통상 등록 트랜잭션이며 INVITE 대화를 만드는 절차와 다르다. 같은 Call-ID만으로 포킹된 복수 대화를 하나로 합치지 않는다. INVITE의 2xx 처리에는 RFC 6026의 상태 기계 보완도 적용한다. [V03, V04]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "4 SIP 기본 요청 메서드"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "메서드",
+        "언제 송신하는가",
+        "응답 및 상태 변화"
+      ],
+      "rows": [
+        [
+          "REGISTER",
+          "주소 AoR과 현재 Contact를 등록 또는 갱신",
+          "200으로 바인딩 확인, 401 인증 후 재요청"
+        ],
+        [
+          "INVITE",
+          "초기 통화 설정 또는 기존 대화의 세션 변경",
+          "1xx 진행 후 2xx~6xx 최종 응답"
+        ],
+        [
+          "ACK",
+          "INVITE 최종 응답을 확인",
+          "ACK에 대한 SIP 응답은 보내지 않음"
+        ],
+        [
+          "BYE",
+          "성립한 세션을 종료",
+          "통상 200, 미디어 송신 종료"
+        ],
+        [
+          "CANCEL",
+          "아직 최종 응답이 오지 않은 요청을 취소",
+          "CANCEL 자체 응답과 원 INVITE 응답은 별개"
+        ],
+        [
+          "OPTIONS",
+          "상대 기능과 도달 가능성을 질의",
+          "200과 Allow, Supported 등 확인"
+        ]
+      ],
+      "widths": [
+        2.7,
+        7.2,
+        6.9
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "REGISTER"
+    },
+    {
+      "type": "p",
+      "text": "등록 만료는 Contact의 expires와 Expires로 전달된다. 바인딩 조회, 추가, 갱신과 삭제가 가능하며 삭제는 만료값 0을 사용한다. 성공한 등록이 미디어 경로의 도달 가능성까지 보장하지는 않는다. REGISTER는 보통 통화 시작마다 한 번씩 하는 동작이 아니라 등록 수명에 맞춰 반복된다. [V03 §10]"
+    },
+    {
+      "type": "h2",
+      "text": "INVITE와 ACK"
+    },
+    {
+      "type": "p",
+      "text": "초기 INVITE는 통화를 만들고 re-INVITE는 코덱, 미디어 주소, 방향 등을 다시 협상한다. ACK는 INVITE 최종 응답만 확인한다. 2xx에 대한 ACK는 별도의 UAC 핵심 처리이며, 3xx~6xx ACK는 INVITE 트랜잭션 처리와 연결된다. ACK 자체에는 200을 보내지 않는다. SDP를 늦게 제공하는 경우 200의 offer에 대한 answer가 ACK에 실릴 수 있다. [V03 §13, V05]"
+    },
+    {
+      "type": "h2",
+      "text": "CANCEL과 BYE"
+    },
+    {
+      "type": "p",
+      "text": "CANCEL이 성공해도 INVITE가 이미 200을 보냈다면 통화가 취소됐다고 단정할 수 없다. INVITE 2xx를 ACK한 뒤 필요하면 BYE를 보내야 한다. 아직 처리 중인 INVITE를 취소하면 통상 CANCEL에 200, INVITE에 487, 이어 ACK가 발생한다. BYE의 200은 INVITE 200과 CSeq 메서드로 구분한다. [V03 §9, §15]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "5 SIP 확장 요청 메서드 전체"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "메서드",
+        "목적과 주요 필드",
+        "관찰할 동작"
+      ],
+      "rows": [
+        [
+          "PRACK",
+          "신뢰성 있는 임시 응답을 확인하며 RAck 사용",
+          "183의 RSeq와 INVITE CSeq를 연결"
+        ],
+        [
+          "UPDATE",
+          "기존 또는 초기 대화에서 세션 정보 갱신",
+          "2xx로 완료하며 ACK를 요구하지 않음"
+        ],
+        [
+          "INFO",
+          "대화 중 응용 정보를 전달",
+          "Info-Package와 본문 형식을 확인"
+        ],
+        [
+          "REFER",
+          "상대에게 Refer-To 대상으로 요청을 지시",
+          "수락과 실제 전환 성공은 별도 결과"
+        ],
+        [
+          "SUBSCRIBE",
+          "이벤트 상태 구독",
+          "Event, Expires, Accept 확인"
+        ],
+        [
+          "NOTIFY",
+          "구독 상태 또는 이벤트 변화 전달",
+          "Event와 Subscription-State 확인"
+        ],
+        [
+          "MESSAGE",
+          "인스턴트 메시지 전달",
+          "통화 밖에서도 가능하며 본문 형식별 해석"
+        ],
+        [
+          "PUBLISH",
+          "이벤트 상태를 서버에 게시",
+          "SIP-ETag와 SIP-If-Match로 상태 갱신"
+        ]
+      ],
+      "widths": [
+        2.8,
+        7.1,
+        6.9
+      ]
+    },
+    {
+      "type": "p",
+      "text": "PRACK는 모든 1xx를 확인하는 메서드가 아니다. 100 Trying은 신뢰성 있는 임시 응답 대상이 아니며, 100rel로 보낸 임시 응답의 RSeq와 RAck를 맞춘다. PRACK에는 별도 최종 응답이 돌아온다. [V06]"
+    },
+    {
+      "type": "p",
+      "text": "UPDATE는 INVITE와 달리 새 대화를 만들지 않으며 세션 협상 충돌과 미완료 offer를 고려해야 한다. INFO의 본문을 무조건 DTMF로 해석해서는 안 된다. RFC 6086은 INFO package 체계를 정의하며, application/dtmf-relay는 구현 관행과 지원 범위를 따로 확인해야 한다. [V07, V08]"
+    },
+    {
+      "type": "p",
+      "text": "REFER의 2xx는 참조 요청의 수락이다. 전환 대상 호출의 성공 여부는 연계된 NOTIFY의 message/sipfrag 등으로 전달될 수 있다. SUBSCRIBE와 NOTIFY의 구독은 통화 대화와 별개 생명주기를 가질 수 있다. MESSAGE의 수신이 음성 세션 성립을 뜻하지 않으며 PUBLISH는 개인 단말 간 음성 패킷이 아니다. [V09, V10, V11, V12]"
+    },
+    {
+      "type": "p",
+      "text": "이 장과 앞 장의 14개가 기준 시점 IANA Methods 목록 전체다. re-INVITE, 재등록, 세션 갱신, 보류와 재개는 별도 메서드 이름이 아니라 기존 메서드의 사용 시나리오다. [V01]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "6 SIP 응답과 오류 처리"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "계열",
+        "의미",
+        "대표 코드와 송신 이유"
+      ],
+      "rows": [
+        [
+          "1xx",
+          "처리 진행 중",
+          "100 처리 중, 180 벨 울림, 183 세션 진행, 199 초기 대화 종료"
+        ],
+        [
+          "2xx",
+          "요청 성공",
+          "200 성공, 204 특정 알림 억제 처리"
+        ],
+        [
+          "3xx",
+          "다른 목적지 또는 서비스 제안",
+          "300 복수 후보, 301 영구 이동, 302 임시 이동"
+        ],
+        [
+          "4xx",
+          "현재 요청에 대한 실패",
+          "401/407 인증, 404 대상 없음, 408 시간 초과, 486 통화 중"
+        ],
+        [
+          "5xx",
+          "서버에서의 처리 실패",
+          "500 내부 오류, 503 서비스 불가, 504 서버 시간 초과"
+        ],
+        [
+          "6xx",
+          "전체 대상 범위의 실패",
+          "600 전체 통화 중, 603 거절, 604 어디에도 없음, 606 수락 불가"
+        ]
+      ],
+      "widths": [
+        2,
+        4.1,
+        10.7
+      ]
+    },
+    {
+      "type": "p",
+      "text": "정확한 코드 목록과 이름은 부록 A에 모두 있다. 202 Accepted는 IANA에서 Deprecated로 표시되어 있다. 번호가 미등록이라고 임의 의미를 부여하지 않는다. Reason-Phrase 문자열이 바뀌어도 상태 코드를 중심으로 처리한다. [V01]"
+    },
+    {
+      "type": "h2",
+      "text": "자주 혼동하는 응답"
+    },
+    {
+      "type": "p",
+      "text": "401은 UAS 또는 등록 서버의 인증 요구이며, 407은 프록시 인증 요구다. 두 응답은 곧바로 비밀번호 오류를 의미하지 않는다. 488은 현재 세션 기술을 수용하지 못함을 나타낼 수 있어 SDP의 코덱, 전송, 암호와 방향을 확인한다. 481은 요청이 가리키는 대화나 트랜잭션을 찾지 못한 경우다. 491은 겹친 offer 등 대화 내 동시 요청을 점검하게 한다. [V03, V05]"
+    },
+    {
+      "type": "p",
+      "text": "422는 세션 타이머의 Min-SE 요구를, 423은 등록 또는 구독 간격의 최소 요구를 보도록 한다. 503에 Retry-After가 있으면 그 조건을 반영한다. 487은 통상 요청 취소의 결과이며 별도 공격이나 서버 장애의 증거가 아니다. [V13, V03]"
+    },
+    {
+      "type": "h2",
+      "text": "UDP 재전송과 타임아웃"
+    },
+    {
+      "type": "p",
+      "text": "SIP/UDP의 재전송은 동일 트랜잭션을 다시 보내는 동작이다. 기본 T1은 500 ms이며 네트워크 조건에 따라 달라진다. INVITE와 비 INVITE의 타이머는 서로 다르다. TCP 또는 TLS에서도 응용 계층 타임아웃과 INVITE 2xx의 재전송·ACK 처리는 남는다. 같은 branch와 CSeq를 추적해 실제 중복 요청과 새 요청을 구분한다. [V03 §17, V04]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "7 인증과 통화 신호의 실제 순서"
+    },
+    {
+      "type": "code",
+      "text": "UA A                  Proxy or Registrar                  UA B\n |--- REGISTER ----------->|                                |\n |<-- 401 challenge -------|                                |\n |--- REGISTER + auth ---->|                                |\n |<-- 200 OK --------------|                                |\n |--- INVITE + SDP ------->|--- INVITE + SDP --------------->|\n |<-- 100 Trying ----------|                                |\n |<-- 180 Ringing ---------|<-- 180 Ringing -----------------|\n |<-- 200 + SDP -----------|<-- 200 + SDP -------------------|\n |--- ACK ---------------->|--- ACK ----------------------->|\n |================ RTP or SRTP ============================|\n |<=============== RTCP or SRTCP ==========================>|\n |--- BYE ---------------->|--- BYE ----------------------->|\n |<-- 200 OK --------------|<-- 200 OK ----------------------|"
+    },
+    {
+      "type": "p",
+      "text": "위 그림은 설명용 흐름이다. 프록시가 Record-Route하지 않으면 대화 내 요청 경로가 달라질 수 있고, B2BUA는 양쪽에 독립 대화를 만든다. 100 Trying, 180, 183, 인증 요구는 구성과 호출 상태에 따라 생략되거나 추가된다. 미디어는 신호 프록시를 경유하지 않고 직접 흐를 수 있다. [V03, V05]"
+    },
+    {
+      "type": "h2",
+      "text": "Digest 인증"
+    },
+    {
+      "type": "p",
+      "text": "인증 요구에는 realm, nonce, algorithm, qop 등이 포함되며, 단말은 Authorization 또는 Proxy-Authorization으로 응답한다. 암호 그 자체를 평문 본문으로 보내는 구조는 아니다. RFC 8760은 SIP Digest에서 SHA-256 및 SHA-512/256 지원을 확장한다. Digest 사용만으로 SIP 전체의 기밀성이 확보되지는 않으므로 TLS 여부도 별도로 확인한다. [V14]"
+    },
+    {
+      "type": "h2",
+      "text": "임시 응답과 조기 미디어"
+    },
+    {
+      "type": "p",
+      "text": "183과 SDP 이후 최종 200 이전에도 안내음 등 조기 미디어가 나갈 수 있다. 신뢰성 있는 183을 사용하면 PRACK와 그 200이 중간에 추가된다. 180이 항상 RTP 벨소리 패킷을 뜻하지 않으며 200 이전의 RTP가 무조건 비정상 트래픽인 것도 아니다. [V06, V05]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "8 SDP 협상과 통화 중 변경"
+    },
+    {
+      "type": "code",
+      "text": "v=0\no=alice 12345 12345 IN IP4 192.0.2.10\ns=Voice session\nc=IN IP4 192.0.2.10\nt=0 0\nm=audio 40000 RTP/AVP 0 8 101\na=rtpmap:0 PCMU/8000\na=rtpmap:8 PCMA/8000\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-16\na=ptime:20\na=sendrecv"
+    },
+    {
+      "type": "p",
+      "text": "위 주소와 포트는 문서용 예시다. SDP는 세션 설명 문법이며 자체적으로 네트워크 전송을 정의하지 않는다. v는 버전, o는 세션 소유자와 세션 버전, c는 접속 주소, t는 시간, m은 미디어와 수신 포트·전송 프로파일·포맷 목록이다. a는 코덱과 방향 등 속성이다. [V15]"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "항목",
+        "실제 송신에 미치는 영향"
+      ],
+      "rows": [
+        [
+          "rtpmap과 fmtp",
+          "동적 PT의 코덱, clock rate, 채널 수와 세부 옵션 결정"
+        ],
+        [
+          "sendrecv",
+          "양방향 미디어 허용"
+        ],
+        [
+          "sendonly와 recvonly",
+          "로컬 세션 관점의 송신 또는 수신 전용"
+        ],
+        [
+          "inactive",
+          "해당 미디어를 양방향으로 비활성화"
+        ],
+        [
+          "m 포트 0",
+          "해당 미디어 스트림 거절 또는 비활성화의 의미"
+        ],
+        [
+          "rtcp와 rtcp-mux",
+          "RTCP 목적지 또는 RTP와의 포트 공유 지정"
+        ],
+        [
+          "ice와 fingerprint 속성",
+          "ICE 자격 정보, 후보, DTLS 인증서 검증 정보 전달"
+        ]
+      ],
+      "widths": [
+        4.5,
+        12.3
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Offer/answer는 동시에 미완료 offer가 겹치지 않도록 진행한다. Answer의 코덱과 방향은 offer 조건을 따라야 한다. 보류와 재개는 보통 re-INVITE 또는 UPDATE의 SDP 방향 변경이다. 세션 타이머 갱신은 Session-Expires와 refresher 역할을 확인한다. 단순 무음과 보류를 RTP 유무 하나로 구분하면 안 된다. [V05, V07, V13]"
+    },
+    {
+      "type": "p",
+      "text": "SDP의 RTP/AVP, RTP/AVPF, RTP/SAVP, RTP/SAVPF는 서로 다른 프로파일이다. 암호·피드백·DTLS 전송 조건을 문자열의 일부분만 보고 합쳐 해석하지 않는다. [V16, V19, V27]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "9 RTP 공통 헤더와 음성 송신"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "UDP 페이로드 내 위치",
+        "길이",
+        "필드와 의미"
+      ],
+      "rows": [
+        [
+          "0",
+          "1 byte",
+          "V 2bit, P 1bit, X 1bit, CC 4bit"
+        ],
+        [
+          "1",
+          "1 byte",
+          "M 1bit, Payload Type 7bit"
+        ],
+        [
+          "2~3",
+          "2 bytes",
+          "Sequence number"
+        ],
+        [
+          "4~7",
+          "4 bytes",
+          "Timestamp"
+        ],
+        [
+          "8~11",
+          "4 bytes",
+          "SSRC"
+        ],
+        [
+          "12 이후",
+          "4 × CC bytes",
+          "선택적 CSRC 목록"
+        ],
+        [
+          "CSRC 다음",
+          "가변",
+          "X가 1이면 extension header와 extension data"
+        ],
+        [
+          "그 다음",
+          "가변",
+          "코덱 페이로드 및 선택적 padding"
+        ]
+      ],
+      "widths": [
+        4.5,
+        3.3,
+        9
+      ]
+    },
+    {
+      "type": "p",
+      "text": "RTP 버전은 2이며 기본 헤더는 12바이트다. Sequence number는 RTP 데이터 패킷마다 증가하고 timestamp는 미디어 샘플 시각을 나타낸다. 초기값은 임의값을 사용한다. SSRC는 한 RTP 동기화 소스를 구분하며 전송 IP 주소의 대체값이 아니다. Marker bit의 의미는 프로파일과 페이로드 정의를 따른다. [V16 §5]"
+    },
+    {
+      "type": "h2",
+      "text": "패킷률과 대역폭 예제"
+    },
+    {
+      "type": "p",
+      "text": "G.711을 20 ms씩 묶으면 페이로드는 160바이트, 초당 50패킷이다. 옵션 없는 IPv4 20 + UDP 8 + RTP 12를 더하면 패킷당 200바이트, 단방향 IP 계층 비트율은 80 kbit/s다. IPv6 기본 헤더 40바이트이면 88 kbit/s다. 링크 계층, 터널, RTCP, 재전송과 SRTP 태그는 이 계산에 포함하지 않았다. 이는 헤더 크기와 64 kbit/s 페이로드에서 산출한 예제다. [V16, V17]"
+    },
+    {
+      "type": "p",
+      "text": "8 kHz RTP clock에서 20 ms의 timestamp 증분은 160이다. Opus는 SDP에서 48 kHz RTP clock을 사용하므로 20 ms의 증분은 960이다. 오디오 샘플링 주파수와 RTP clock이 항상 같은 것은 아니며 G.722의 정적 RTP clock은 8 kHz이다. [V17, V18]"
+    },
+    {
+      "type": "h2",
+      "text": "확장 헤더"
+    },
+    {
+      "type": "p",
+      "text": "X bit가 1이면 16비트 profile identifier와 16비트 길이가 뒤따른다. 길이는 확장 데이터의 32비트 word 수다. RFC 8285의 one-byte 형식은 0xBEDE 식별자와 ID·길이 nibble을 사용한다. 확장 ID의 실제 의미는 SDP extmap 등 협상 결과를 확인한다. 오디오 레벨 같은 확장을 코덱 본문으로 읽지 않는다. [V20, V21]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "10 오디오 페이로드와 이벤트 패킷"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "유형",
+        "패킷 안에서의 형식",
+        "해석 기준"
+      ],
+      "rows": [
+        [
+          "PCMU와 PCMA",
+          "8bit 샘플을 순서대로 담음",
+          "RTP/AVP 정적 PT 0과 8"
+        ],
+        [
+          "G.722와 G.729",
+          "각 코덱의 압축 프레임",
+          "정적 PT 9와 18 및 해당 규격"
+        ],
+        [
+          "Opus",
+          "TOC와 하나 이상의 압축 프레임",
+          "동적 PT, rtpmap opus/48000/2"
+        ],
+        [
+          "AMR와 AMR-WB",
+          "CMR, TOC 목록과 음성 프레임",
+          "octet-align, 모드와 CRC 등 fmtp"
+        ],
+        [
+          "telephone-event",
+          "event 8bit, E/R/volume 8bit, duration 16bit",
+          "협상한 PT와 clock, 이벤트 번호"
+        ],
+        [
+          "CN",
+          "레벨과 선택적 스펙트럼 파라미터",
+          "별도 comfort noise 페이로드"
+        ]
+      ],
+      "widths": [
+        3.6,
+        7,
+        6.2
+      ]
+    },
+    {
+      "type": "p",
+      "text": "DTMF는 보통 RFC 4733의 telephone-event로 전송한다. 동일 이벤트의 진행 패킷은 timestamp를 유지하면서 duration을 늘린다. 마지막은 E bit를 세우고 손실 내성을 위해 종료 패킷을 반복할 수 있다. 같은 숫자가 반복 캡처됐다고 여러 번 눌렀다고 판단하지 않는다. SIP INFO 방식과 실제 음성 대역 안의 톤은 별도 경로다. [V24]"
+    },
+    {
+      "type": "p",
+      "text": "CN은 음성 RTP가 중단된 구간에서 배경 잡음 특성을 전달한다. VAD/DTX로 음성 패킷률이 줄어도 통화가 종료된 것은 아니다. Opus는 자체 DTX와 in-band FEC 기능을 가질 수 있으며, 임의의 별도 CN 패킷이 반드시 생기지 않는다. [V25, V18]"
+    },
+    {
+      "type": "p",
+      "text": "AMR 계열의 bandwidth-efficient와 octet-aligned 모드는 바이트 해석이 다르다. Payload Type만 일치해도 fmtp 조건이 다르면 디코딩에 실패할 수 있다. 코덱 목록은 부록 E에 등록된 audio 하위 유형 전부를 제공하며, 개별 비트스트림은 각 RFC와 코덱 원문으로 해석한다. [V26, V02]"
+    },
+    {
+      "type": "h2",
+      "text": "중복과 복구"
+    },
+    {
+      "type": "p",
+      "text": "RED는 주·중복 블록을 하나의 RTP 페이로드에 담는다. RTX는 별도 재전송 스트림의 페이로드 앞에 원래 sequence number 16비트를 넣으며 apt로 원 페이로드와 연결된다. XOR 기반 FEC는 별도 복구 정보를 전송한다. 이들은 모든 음성 통화의 필수 패킷이 아니며 협상·프로파일에 따라 사용한다. [V42, V43, V44]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "11 RTCP 공통 형식과 기본 패킷"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "공통 필드",
+        "크기",
+        "의미"
+      ],
+      "rows": [
+        [
+          "V P count 또는 subtype",
+          "8bit",
+          "버전 2, 패딩, 보고 블록 수 또는 하위 유형"
+        ],
+        [
+          "PT",
+          "8bit",
+          "RTCP 패킷 유형"
+        ],
+        [
+          "length",
+          "16bit",
+          "현재 RTCP 패킷 전체의 32bit word 수에서 1을 뺀 값"
+        ],
+        [
+          "본문",
+          "가변",
+          "PT별 SSRC와 보고 또는 제어 데이터"
+        ]
+      ],
+      "widths": [
+        5.3,
+        2.5,
+        9
+      ]
+    },
+    {
+      "type": "table",
+      "headers": [
+        "PT",
+        "이름",
+        "송신 목적과 핵심 필드"
+      ],
+      "rows": [
+        [
+          "200",
+          "SR",
+          "송신자 통계, NTP와 RTP timestamp 대응, packet·octet count"
+        ],
+        [
+          "201",
+          "RR",
+          "수신 품질, 손실과 jitter, LSR 및 DLSR"
+        ],
+        [
+          "202",
+          "SDES",
+          "CNAME 등 소스 설명 item"
+        ],
+        [
+          "203",
+          "BYE",
+          "참가 소스 종료와 선택적 이유"
+        ],
+        [
+          "204",
+          "APP",
+          "응용별 subtype, SSRC, name와 데이터"
+        ],
+        [
+          "205",
+          "RTPFB",
+          "전송 관련 피드백"
+        ],
+        [
+          "206",
+          "PSFB",
+          "페이로드 관련 피드백"
+        ],
+        [
+          "207",
+          "XR",
+          "확장 품질 보고 블록"
+        ]
+      ],
+      "widths": [
+        1.4,
+        2,
+        13.4
+      ]
+    },
+    {
+      "type": "p",
+      "text": "SR과 RR의 reception report block은 각 수신 소스에 대한 fraction lost, 누적 손실, 확장 sequence number, jitter, LSR와 DLSR을 담는다. SR은 송신자 시계와 패킷 통계도 포함한다. CNAME은 SSRC가 달라져도 동기화와 참가자 연관에 사용된다. RTCP BYE는 SIP BYE와 다른 계층의 패킷이다. [V16 §6]"
+    },
+    {
+      "type": "p",
+      "text": "일반 compound RTCP는 여러 RTCP 패킷을 한 전송 단위에 연속 배치한다. 기본 compound 규칙과 RFC 5506의 reduced-size RTCP 허용 조건은 구분한다. 한 UDP 데이터그램 안에서 각 length를 따라 다음 RTCP 헤더로 이동해야 한다. [V16, V45]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "12 RTCP 피드백과 확장 보고"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "유형",
+        "패킷 식별",
+        "설명"
+      ],
+      "rows": [
+        [
+          "Generic NACK",
+          "RTPFB 205, FMT 1",
+          "PID와 BLP로 빠진 RTP sequence number를 알림"
+        ],
+        [
+          "TMMBR와 TMMBN",
+          "RTPFB 205, FMT 3과 4",
+          "최대 미디어 비트율 요청과 통지"
+        ],
+        [
+          "PLI",
+          "PSFB 206, FMT 1",
+          "디코딩 가능한 새 화면 필요를 알림"
+        ],
+        [
+          "SLI와 RPSI",
+          "PSFB 206, FMT 2와 3",
+          "영상 슬라이스 손실과 참조 화면 정보"
+        ],
+        [
+          "FIR",
+          "PSFB 206, FMT 4",
+          "전체 화면 갱신 요구"
+        ],
+        [
+          "XR",
+          "PT 207 내부 block type",
+          "손실·중복·지연·VoIP 품질을 확장 보고"
+        ]
+      ],
+      "widths": [
+        3.6,
+        4.5,
+        8.7
+      ]
+    },
+    {
+      "type": "p",
+      "text": "기본 AVPF의 RTPFB와 PSFB는 SSRC of packet sender, SSRC of media source, feedback control information을 포함한다. 같은 PT라도 5비트 FMT에 따라 본문 의미가 달라진다. PLI·FIR은 영상 통화에서 관련되며 일반 오디오 전용 통화의 필수 송신 패킷은 아니다. 모든 등록 FMT는 부록 C·D에서 확인한다. [V19, V46, V02]"
+    },
+    {
+      "type": "p",
+      "text": "RFC 3611 XR의 기본 block type은 1 Loss RLE, 2 Duplicate RLE, 3 Packet Receipt Times, 4 Receiver Reference Time, 5 DLRR, 6 Statistics Summary, 7 VoIP Metrics다. 이후 확장 block은 해당 등록과 RFC에 따라 해석한다. VoIP Metrics에는 손실·폐기율, burst/gap, 지연, 신호·잡음과 품질 추정값 등이 담길 수 있다. [V47]"
+    },
+    {
+      "type": "h2",
+      "text": "품질 수치 해석"
+    },
+    {
+      "type": "p",
+      "text": "RTP interarrival jitter의 단위는 RTP timestamp 단위다. 이를 밀리초로 바꾸려면 해당 clock rate를 사용한다. RTT를 SR/RR에서 추정할 때는 compact NTP 시각과 LSR, DLSR의 관계를 따라야 한다. RTP sequence gap만으로 최종 음성 손실률을 계산하면 재정렬, 중복, 복구와 수신 버퍼 폐기를 놓칠 수 있다. [V16, V47]"
+    },
+    {
+      "type": "p",
+      "text": "RTCP 송신 간격은 세션 대역폭, 참가자 수와 피드백 프로파일에 영향을 받는다. 음성 RTP처럼 20 ms마다 고정 송신하는 패킷으로 취급하지 않는다. 혼잡 피드백과 코덱 내부 FEC, RTX는 서로 다른 수단이며 중복 활성화가 실제 대역폭을 늘릴 수 있다. [V19, V44, V48]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "13 RTP와 RTCP 바이트 예제"
+    },
+    {
+      "type": "code",
+      "text": "RTP payload, hexadecimal\n80 00 12 34  00 00 00 a0  11 22 33 44  [160 audio bytes]\n\nRTCP RR with no reception blocks\n80 c9 00 01  11 22 33 44\n\nRTCP BYE for one SSRC\n81 cb 00 01  11 22 33 44\n\nRTP telephone-event payload only\n05 8a 00 a0"
+    },
+    {
+      "type": "p",
+      "text": "첫 RTP 헤더는 V=2, P=0, X=0, CC=0, M=0, PT=0, sequence=0x1234, timestamp=160, SSRC=0x11223344다. RTP/AVP에서 PT 0은 PCMU지만 실제 전송 프로파일과 협상도 확인한다. 160바이트 페이로드라면 8 kHz G.711에서 20 ms의 오디오에 해당한다. [V16, V17]"
+    },
+    {
+      "type": "p",
+      "text": "RR 예제는 PT=201이며 length=1이므로 전체 8바이트다. 보고 블록 수가 0인 RR이다. BYE 예제의 count=1은 한 SSRC를 뜻한다. 기본 compound 규칙을 만족하는 완성된 RTCP 데이터그램을 만들려면 필요한 다른 RTCP 패킷과 CNAME 등을 추가해야 한다. 위 두 예제를 독립적인 필수 완성형으로 오해하지 않는다. [V16, V45]"
+    },
+    {
+      "type": "p",
+      "text": "telephone-event 페이로드는 event=5, E=1, R=0, volume=10, duration=160이다. 8 kHz clock이면 duration은 20 ms다. 실제 DTMF 이벤트는 더 긴 누적 duration을 가질 수 있으며, 동일 이벤트의 종료 재전송은 타임스탬프와 지속시간을 함께 봐야 한다. [V24]"
+    },
+    {
+      "type": "h2",
+      "text": "안전한 파싱 순서"
+    },
+    {
+      "type": "p",
+      "text": "먼저 UDP 또는 스트림 경계를 복원하고, 버전과 최소 길이를 검사한다. RTP는 CC, extension length, padding을 따라 페이로드 시작과 끝을 계산한다. RTCP는 length마다 이동하고 compound의 잔여 길이를 확인한다. SRTP에서는 암호 프로파일의 태그와 MKI 조건도 계산해야 한다. 알려진 헤더가 보인다는 이유만으로 길이 검사를 생략하면 안 된다."
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "14 STUN 패킷 전체 구조와 역할"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "오프셋",
+        "길이",
+        "내용"
+      ],
+      "rows": [
+        [
+          "0~1",
+          "2 bytes",
+          "Message Type, 상위 2bit는 0"
+        ],
+        [
+          "2~3",
+          "2 bytes",
+          "Message Length, 20byte 헤더를 제외한 본문 길이"
+        ],
+        [
+          "4~7",
+          "4 bytes",
+          "Magic cookie 0x2112A442"
+        ],
+        [
+          "8~19",
+          "12 bytes",
+          "Transaction ID"
+        ],
+        [
+          "20 이후",
+          "가변",
+          "Attribute type 16bit, length 16bit, value와 32bit 정렬 패딩"
+        ]
+      ],
+      "widths": [
+        3,
+        3.2,
+        10.6
+      ]
+    },
+    {
+      "type": "p",
+      "text": "STUN의 메시지 종류는 method와 class의 조합이다. class는 Request, Indication, Success Response, Error Response의 네 가지다. Binding은 매핑 주소 발견과 ICE 연결 검사에 사용된다. Binding Request 0x0001, Success 0x0101, Error 0x0111, Indication 0x0011이 대표 값이다. [V23]"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "속성",
+        "패킷 해석 의미"
+      ],
+      "rows": [
+        [
+          "XOR-MAPPED-ADDRESS",
+          "NAT가 외부에 노출한 주소와 포트"
+        ],
+        [
+          "USERNAME REALM NONCE",
+          "단기 또는 장기 자격 정보와 인증 문맥"
+        ],
+        [
+          "MESSAGE-INTEGRITY 계열",
+          "메시지 무결성 검증"
+        ],
+        [
+          "FINGERPRINT",
+          "메시지 식별 보조와 CRC 기반 검사"
+        ],
+        [
+          "ERROR-CODE",
+          "실패 원인과 선택적 설명"
+        ],
+        [
+          "PRIORITY ICE-CONTROLLING ICE-CONTROLLED USE-CANDIDATE",
+          "ICE 후보 우선순위, 역할, nomination"
+        ]
+      ],
+      "widths": [
+        7.2,
+        9.6
+      ]
+    },
+    {
+      "type": "p",
+      "text": "XOR 주소는 8비트 비밀 키로 암호화한 주소가 아니다. 포트는 cookie 상위 16비트와 XOR하고 IPv4 주소는 cookie와, IPv6 주소는 cookie 및 transaction ID와 XOR한다. Attribute length에는 정렬 패딩을 넣지 않지만 전체 메시지 길이에는 포함한다. [V23]"
+    },
+    {
+      "type": "p",
+      "text": "인증 오류 뒤 새로운 nonce로 다시 보내는 것은 정상 절차일 수 있다. 401, 438과 무결성 오류를 SIP의 같은 숫자 응답과 혼동하지 않는다. STUN은 NAT를 무조건 여는 프로토콜이 아니며, 실제 미디어 연결의 성공은 ICE 또는 별도 연결 검사로 확인한다."
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "15 TURN 제어와 미디어 중계 패킷"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "메시지",
+        "방향",
+        "송신 목적과 주요 속성"
+      ],
+      "rows": [
+        [
+          "Allocate",
+          "클라이언트에서 서버",
+          "중계 주소 확보, REQUESTED-TRANSPORT, LIFETIME"
+        ],
+        [
+          "Refresh",
+          "클라이언트에서 서버",
+          "할당 갱신 또는 lifetime 0으로 해제"
+        ],
+        [
+          "CreatePermission",
+          "클라이언트에서 서버",
+          "XOR-PEER-ADDRESS에 대한 수신 허용"
+        ],
+        [
+          "ChannelBind",
+          "클라이언트에서 서버",
+          "채널 번호와 피어 주소를 연결"
+        ],
+        [
+          "Send Indication",
+          "클라이언트에서 서버",
+          "DATA와 피어 주소를 전달"
+        ],
+        [
+          "Data Indication",
+          "서버에서 클라이언트",
+          "피어에서 온 DATA와 주소를 전달"
+        ],
+        [
+          "ChannelData",
+          "양방향",
+          "4byte 채널 헤더 뒤 실제 피어 데이터"
+        ],
+        [
+          "Connect ConnectionBind ConnectionAttempt",
+          "TCP 중계 확장",
+          "RFC 6062의 연결 생성과 데이터 연결 결합"
+        ]
+      ],
+      "widths": [
+        4.1,
+        4.8,
+        7.9
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Allocate·Refresh·CreatePermission·ChannelBind는 STUN 형식의 request와 success/error response를 사용한다. Send와 Data는 indication이므로 STUN 응답을 기대하는 트랜잭션이 아니다. ChannelData는 STUN 헤더를 사용하지 않는다. [V28]"
+    },
+    {
+      "type": "code",
+      "text": "ChannelData\n0..1  Channel Number, 0x4000 through 0x7FFF\n2..3  Length of application data\n4..   Application data, optional transport padding"
+    },
+    {
+      "type": "p",
+      "text": "ChannelData의 길이는 응용 데이터 길이다. 전송에 따른 4바이트 정렬 처리와 스트림 프레이밍을 확인한다. ChannelBind가 유효해야 채널 번호를 목적지로 해석할 수 있다. 클라이언트와 TURN 사이의 패킷을 피어가 최종 수신하는 RTP 패킷과 동일한 바이트열로 세지 않는다. [V28]"
+    },
+    {
+      "type": "p",
+      "text": "TURN over TCP 또는 TLS는 클라이언트와 TURN 사이 전송 방식이다. 이것만으로 서버와 피어 사이도 TCP라는 뜻은 아니다. RFC 6062의 TCP allocation은 별도 확장이며 Connect, ConnectionBind, ConnectionAttempt를 정의한다. [V29]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "16 ICE 검사와 연결 유지"
+    },
+    {
+      "type": "p",
+      "text": "ICE는 독립적인 새 미디어 헤더가 아니라 후보 수집, 후보 교환, 검사, 선택 절차다. 후보는 host, server-reflexive, peer-reflexive, relayed로 구별한다. 서버 반사 후보에는 STUN, 중계 후보에는 TURN이 관여할 수 있다. [V31]"
+    },
+    {
+      "type": "code",
+      "text": "1  Exchange candidates and ICE credentials in signaling\n2  Send STUN Binding connectivity checks on candidate pairs\n3  Validate MESSAGE-INTEGRITY and ICE role\n4  Nominate a successful pair\n5  Send media on the selected pair\n6  Refresh consent and maintain required mappings"
+    },
+    {
+      "type": "p",
+      "text": "검사 요청은 ufrag를 조합한 USERNAME, 무결성 검증, PRIORITY와 역할 속성을 포함한다. controlling과 controlled의 충돌은 487 Role Conflict 등의 처리 대상이다. 선택된 후보 쌍은 로컬 수신 주소와 원격 수신 주소의 조합이므로 SDP c 주소 하나만 보고 경로를 단정하지 않는다. [V31]"
+    },
+    {
+      "type": "h2",
+      "text": "NAT 유지와 동의 확인"
+    },
+    {
+      "type": "p",
+      "text": "SIP Outbound의 CRLF keepalive는 신호 연결의 유지에 쓰일 수 있다. 이 바이트열은 별도 SIP 요청 메서드가 아니다. STUN 기반 keepalive, RTP 미디어 흐름, RTCP와 TURN Refresh는 서로 다른 수명과 목적을 갖는다. [V32]"
+    },
+    {
+      "type": "p",
+      "text": "Consent freshness는 상대가 계속 수신에 동의하는지 검사하는 절차다. WebRTC 환경에서는 주기적인 STUN Binding 요청·응답이 이미 성립한 미디어 경로에서 계속 나갈 수 있다. 이것을 재등록이나 통화 재설정으로 해석하지 않는다. [V33]"
+    },
+    {
+      "type": "h2",
+      "text": "장애를 좁히는 순서"
+    },
+    {
+      "type": "p",
+      "text": "후보 교환 유무, Binding 요청 송신, 반대 방향 응답, 무결성 성공, nomination, 실제 RTP 또는 SRTP를 차례로 확인한다. TURN을 사용한다면 allocation 수명, permission과 channel 수명도 확인한다. 한쪽 음성만 들리는 경우 양쪽의 선택된 후보 쌍과 NAT 변환 후 캡처를 비교한다. [V28, V31]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "17 보안 레코드와 SRTP"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "방식",
+        "패킷에서 관찰되는 내용",
+        "보호 범위와 관계"
+      ],
+      "rows": [
+        [
+          "SIP over TLS",
+          "TLS handshake와 application data",
+          "신호 전송 연결의 기밀성과 무결성"
+        ],
+        [
+          "DTLS SRTP",
+          "DTLS handshake와 use_srtp 확장",
+          "SRTP 키 도출과 인증서 검증"
+        ],
+        [
+          "SRTP",
+          "RTP 헤더, 보호된 페이로드, 선택적 MKI와 태그",
+          "음성 페이로드 보호와 재생 공격 방어"
+        ],
+        [
+          "SRTCP",
+          "RTCP 일부 평문, 보호된 부분, index와 E bit, 태그",
+          "RTCP 제어 데이터 보호"
+        ],
+        [
+          "SDES",
+          "SDP crypto 속성에 키 관련 정보",
+          "신호 경로의 보안과 키 노출을 함께 평가"
+        ],
+        [
+          "MIKEY와 ZRTP",
+          "별도 키 관리 메시지",
+          "각 표준·문서와 지원 프로파일을 별도로 확인"
+        ]
+      ],
+      "widths": [
+        3.5,
+        6.4,
+        6.9
+      ]
+    },
+    {
+      "type": "p",
+      "text": "SRTP는 모든 RTP 헤더를 암호화하지 않는다. 일반적으로 SSRC, sequence와 timestamp는 보이지만 음성 내용은 보호된다. ROC는 SRTP 패킷 인덱스 계산에 사용하며 매 패킷에 별도 고정 32비트 필드로 실리는 값이 아니다. SRTCP는 전송되는 31비트 index와 E bit를 가진다. MKI와 인증 태그 크기는 선택한 암호 프로파일에 따른다. [V27, V34]"
+    },
+    {
+      "type": "p",
+      "text": "DTLS-SRTP는 DTLS가 음성 패킷을 계속 감싸 보내는 구조가 아니다. DTLS로 협상하고 키를 도출한 후 미디어는 SRTP/SRTCP로 흐른다. SDP fingerprint와 실제 인증서가 맞는지 검증해야 한다. DTLS 1.2의 13바이트 레코드 헤더를 DTLS 1.3의 unified header에 그대로 적용해서는 안 된다. [V35, V36, V37]"
+    },
+    {
+      "type": "p",
+      "text": "TLS에는 handshake, alert와 application data 등의 레코드가 있다. TLS 1.3은 암호화된 내부 콘텐츠 유형 때문에 겉으로 보이는 record type만으로 실제 내부 메시지를 항상 알 수 없다. 단순히 5061 포트를 사용한다는 사실만으로 종단 간 신원 검증이나 미디어 암호화까지 보장하지 않는다. [V38]"
+    },
+    {
+      "type": "p",
+      "text": "SDES의 RFC 4568과 MIKEY의 RFC 3830은 Standards Track 문서이며 ZRTP RFC 6189는 Informational이다. 보안 키 관리 방식의 명칭을 SIP 메서드나 RTP Payload Type과 혼동하지 않는다. [V49, V50, V51]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "18 H323 계열의 호 제어 메시지"
+    },
+    {
+      "type": "p",
+      "text": "H.323은 H.225.0의 RAS와 호출 신호, H.245의 미디어 제어, RTP/RTCP를 조합한다. RAS는 통상 UDP, 호출 신호는 통상 TCP이며 ASN.1 PER 인코딩을 사용하는 구조가 포함된다. RTP와 RTCP의 미디어 기본 해석은 앞 장과 연결된다. [V52, V53, V54]"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "메시지 묶음",
+        "송신 목적과 대응"
+      ],
+      "rows": [
+        [
+          "GRQ GCF GRJ",
+          "Gatekeeper 발견 요청, 확인과 거절"
+        ],
+        [
+          "RRQ RCF RRJ 및 URQ UCF URJ",
+          "단말 등록과 등록 해제"
+        ],
+        [
+          "ARQ ACF ARJ",
+          "호 설정에 필요한 admission 요청과 결과"
+        ],
+        [
+          "BRQ BCF BRJ",
+          "대역폭 변경 요청과 결과"
+        ],
+        [
+          "DRQ DCF DRJ",
+          "호의 admission 해제"
+        ],
+        [
+          "LRQ LCF LRJ",
+          "목적지 위치 조회"
+        ],
+        [
+          "IRQ IRR IACK INAK",
+          "상태 조회, 정보 보고와 보고 응답"
+        ],
+        [
+          "RIP RAI RAC",
+          "처리 진행 통지, 자원 가용 상태와 확인"
+        ],
+        [
+          "NSM 및 서비스 확장",
+          "비표준 메시지와 버전별 서비스 제어 등의 추가 유형"
+        ]
+      ],
+      "widths": [
+        6.2,
+        10.6
+      ]
+    },
+    {
+      "type": "p",
+      "text": "위 표는 주요 RAS 가족의 기능 색인이다. 부록 I에 2022년 3월판의 최상위 ASN.1 선택지를 모두 수록했다. 본문은 모든 ITU-T 판의 확장을 하나로 합친 송신 필수 집합으로 취급하지 않는다."
+    },
+    {
+      "type": "h2",
+      "text": "호출 신호와 H245"
+    },
+    {
+      "type": "p",
+      "text": "H.225.0 호출 신호에는 Setup, Call Proceeding, Alerting, Progress, Connect, Facility, Release Complete, Status와 Status Inquiry 등이 있다. H.245는 Request, Response, Command, Indication의 상위 선택 아래 능력 교환, master/slave 결정, 논리 채널 열기·닫기, 모드 변경, 왕복 지연 검사와 user input 전달을 수행한다. [V53, V54]"
+    },
+    {
+      "type": "p",
+      "text": "대표 절차는 TerminalCapabilitySet과 Ack 또는 Reject, MasterSlaveDetermination과 응답, OpenLogicalChannel과 Ack 또는 Reject, CloseLogicalChannel과 Ack다. fastStart와 H.245 tunneling을 사용하면 독립 H.245 연결이 보이지 않아도 미디어 설정이 가능하다. 고정 바이트 오프셋을 가정하기보다 해당 판의 ASN.1로 디코딩한다. [V52, V53, V54]"
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "19 H248과 MGCP 및 다른 문서화 프로토콜"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "H.248 명령",
+        "작용"
+      ],
+      "rows": [
+        [
+          "Add",
+          "Termination을 Context에 추가"
+        ],
+        [
+          "Modify",
+          "미디어, 이벤트와 신호 등 속성 변경"
+        ],
+        [
+          "Subtract",
+          "Context에서 제거하고 통계 등을 회수"
+        ],
+        [
+          "Move",
+          "Termination을 다른 Context로 이동"
+        ],
+        [
+          "AuditValue",
+          "현재 속성과 상태 조회"
+        ],
+        [
+          "AuditCapabilities",
+          "지원 가능한 속성·능력 조회"
+        ],
+        [
+          "Notify",
+          "검출 이벤트 보고"
+        ],
+        [
+          "ServiceChange",
+          "서비스 시작, 정지와 재시작 등 통지"
+        ]
+      ],
+      "widths": [
+        5.2,
+        11.6
+      ]
+    },
+    {
+      "type": "p",
+      "text": "H.248은 Transaction Request, Reply, Pending, ResponseAck에 Action과 Command를 담는다. Context와 Termination을 식별하고 Local/Remote descriptor 등에 세션 정보를 싣는다. 텍스트와 바이너리 인코딩이 있으며 패키지는 이벤트·신호·통계를 확장한다. RFC 3525는 H.248 version 1을 설명하는 Historic 문서이므로 현행 ITU-T 판과 같은 것으로 표시하면 안 된다. [V40, V55]"
+    },
+    {
+      "type": "h2",
+      "text": "MGCP"
+    },
+    {
+      "type": "p",
+      "text": "MGCP의 기본 9개 명령은 EPCF EndpointConfiguration, CRCX CreateConnection, MDCX ModifyConnection, DLCX DeleteConnection, RQNT NotificationRequest, NTFY Notify, AUEP AuditEndpoint, AUCX AuditConnection, RSIP RestartInProgress다. 명령 줄은 verb, transaction ID, endpoint ID, MGCP 버전을 가지며 응답은 세 자리 코드와 transaction ID를 연결한다. SDP 본문으로 미디어를 기술할 수 있다. RFC 3435는 Informational이다. [V39]"
+    },
+    {
+      "type": "h2",
+      "text": "그 밖의 패킷을 만났을 때"
+    },
+    {
+      "type": "p",
+      "text": "IAX2는 RFC 5456에 문서화된 Informational 프로토콜로 full frame, mini frame, trunk와 신호 하위 명령을 사용하며 UDP 4569가 대표 식별 단서다. 모든 VoIP의 표준 패킷이라고 묶지 않는다. SIP-I/SIP-T의 ISUP 본문, 팩스 전환의 T.38 및 제품 전용 SCCP는 적용 규격과 별도 페이로드 해석이 필요하다. [V41, V56, V57]"
+    },
+    {
+      "type": "p",
+      "text": "따라서 이 장의 H.323과 게이트웨이 제어 목록은 연동 트래픽 분류를 위한 설명이다. 상세한 모든 패키지, 서비스 부속서와 비트스트림을 구현할 때는 지정한 프로파일의 원문을 추가로 따라야 한다."
+    },
+    {
+      "type": "break",
+      "text": ""
+    },
+    {
+      "type": "h1",
+      "text": "20 캡처 분석 절차와 패킷별 점검"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "관찰 증상",
+        "연결해서 볼 패킷",
+        "먼저 확인할 내용"
+      ],
+      "rows": [
+        [
+          "등록 실패",
+          "REGISTER, 401/407, 재요청과 최종 응답",
+          "realm, nonce, 인증 알고리즘, 만료값"
+        ],
+        [
+          "벨이 울리지 않음",
+          "INVITE, 1xx와 4xx~6xx",
+          "목적지, 포킹, 라우팅, 수신 측 응답"
+        ],
+        [
+          "응답 후 끊김",
+          "200, ACK, BYE와 세션 타이머",
+          "ACK 도착, Contact와 Route, 갱신 역할"
+        ],
+        [
+          "한쪽 음성",
+          "SDP, ICE Binding, TURN, 양방향 RTP",
+          "선택 후보 쌍, 방화벽, 실제 수신 포트"
+        ],
+        [
+          "음성 깨짐",
+          "RTP sequence와 timestamp, RTCP RR/XR",
+          "손실·재정렬·jitter·폐기와 clock"
+        ],
+        [
+          "DTMF 오류",
+          "telephone-event, INFO와 협상",
+          "PT, event range, duration과 종료 반복"
+        ],
+        [
+          "보안 협상 실패",
+          "SDP fingerprint, DTLS 또는 TLS alert",
+          "인증서, 역할, 암호 프로파일과 시계"
+        ]
+      ],
+      "widths": [
+        3,
+        6,
+        7.8
+      ]
+    },
+    {
+      "type": "p",
+      "text": "분석은 신호와 미디어의 시간축을 연결하는 작업이다. IP 주소와 포트, Call-ID와 tag, SSRC와 협상된 PT, ICE 자격 정보와 후보 쌍을 각각 유지한다. NAT, SBC와 B2BUA 전후에서 식별값이 바뀔 수 있으므로 하나의 값으로 전체 호출을 연결하지 않는다."
+    },
+    {
+      "type": "code",
+      "text": "Example display filters\nsip\nrtp || rtcp\nstun\ndtls || tls\nudp.port == 3478 || tcp.port == 5349\nh225 || h245 || h248 || mgcp"
+    },
+    {
+      "type": "p",
+      "text": "필터 이름은 사용하는 분석 도구 버전에서 확인한다. 암호화되거나 동적 포트를 사용하는 경우 Decode As와 SDP 연계가 필요할 수 있다. 포트 필터 하나만 저장하면 ICE 미디어 포트 검사나 비기본 SIP 포트를 놓칠 수 있다. 예제는 식별 작업의 시작점이며 완전한 캡처 필터가 아니다."
+    },
+    {
+      "type": "h2",
+      "text": "본문과 부록을 함께 쓰는 방법"
+    },
+    {
+      "type": "p",
+      "text": "먼저 프로토콜 계층과 협상 문맥을 정하고, 본문에서 길이와 공통 필드를 해석한 다음, 부록의 등록값과 원문 RFC를 확인한다. 등록 목록은 지원 여부를 보장하지 않는다. 문서에 없는 새 등록값은 함께 제공한 스냅샷과 최신 IANA를 비교해 갱신한다."
+    },
+    {
+      "type": "references",
+      "items": [
+        {
+          "type": "source",
+          "text": "[V01] IANA SIP Parameters",
+          "url": "https://www.iana.org/assignments/sip-parameters/"
+        },
+        {
+          "type": "source",
+          "text": "[V02] IANA RTP Parameters",
+          "url": "https://www.iana.org/assignments/rtp-parameters/"
+        },
+        {
+          "type": "source",
+          "text": "[V03] RFC 3261 SIP §§7~18",
+          "url": "https://www.rfc-editor.org/rfc/rfc3261.html"
+        },
+        {
+          "type": "source",
+          "text": "[V04] RFC 6026 SIP INVITE transaction corrections",
+          "url": "https://www.rfc-editor.org/rfc/rfc6026.html"
+        },
+        {
+          "type": "source",
+          "text": "[V05] RFC 3264 Offer Answer Model",
+          "url": "https://www.rfc-editor.org/rfc/rfc3264.html"
+        },
+        {
+          "type": "source",
+          "text": "[V06] RFC 3262 Reliable Provisional Responses",
+          "url": "https://www.rfc-editor.org/rfc/rfc3262.html"
+        },
+        {
+          "type": "source",
+          "text": "[V07] RFC 3311 UPDATE",
+          "url": "https://www.rfc-editor.org/rfc/rfc3311.html"
+        },
+        {
+          "type": "source",
+          "text": "[V08] RFC 6086 INFO Method and Package Framework",
+          "url": "https://www.rfc-editor.org/rfc/rfc6086.html"
+        },
+        {
+          "type": "source",
+          "text": "[V09] RFC 3515 REFER",
+          "url": "https://www.rfc-editor.org/rfc/rfc3515.html"
+        },
+        {
+          "type": "source",
+          "text": "[V10] RFC 6665 SIP Events",
+          "url": "https://www.rfc-editor.org/rfc/rfc6665.html"
+        },
+        {
+          "type": "source",
+          "text": "[V11] RFC 3428 MESSAGE",
+          "url": "https://www.rfc-editor.org/rfc/rfc3428.html"
+        },
+        {
+          "type": "source",
+          "text": "[V12] RFC 3903 PUBLISH",
+          "url": "https://www.rfc-editor.org/rfc/rfc3903.html"
+        },
+        {
+          "type": "source",
+          "text": "[V13] RFC 4028 Session Timers",
+          "url": "https://www.rfc-editor.org/rfc/rfc4028.html"
+        },
+        {
+          "type": "source",
+          "text": "[V14] RFC 8760 SIP Digest Authentication",
+          "url": "https://www.rfc-editor.org/rfc/rfc8760.html"
+        },
+        {
+          "type": "source",
+          "text": "[V15] RFC 8866 SDP",
+          "url": "https://www.rfc-editor.org/rfc/rfc8866.html"
+        },
+        {
+          "type": "source",
+          "text": "[V16] RFC 3550 RTP and RTCP",
+          "url": "https://www.rfc-editor.org/rfc/rfc3550.html"
+        },
+        {
+          "type": "source",
+          "text": "[V17] RFC 3551 RTP Audio Video Profile",
+          "url": "https://www.rfc-editor.org/rfc/rfc3551.html"
+        },
+        {
+          "type": "source",
+          "text": "[V18] RFC 7587 RTP Payload Format for Opus",
+          "url": "https://www.rfc-editor.org/rfc/rfc7587.html"
+        },
+        {
+          "type": "source",
+          "text": "[V19] RFC 4585 RTP AVPF",
+          "url": "https://www.rfc-editor.org/rfc/rfc4585.html"
+        },
+        {
+          "type": "source",
+          "text": "[V20] RFC 8285 RTP Header Extensions",
+          "url": "https://www.rfc-editor.org/rfc/rfc8285.html"
+        },
+        {
+          "type": "source",
+          "text": "[V21] RFC 6464 Client to Mixer Audio Level",
+          "url": "https://www.rfc-editor.org/rfc/rfc6464.html"
+        },
+        {
+          "type": "source",
+          "text": "[V22] RFC 5761 RTP RTCP Multiplexing",
+          "url": "https://www.rfc-editor.org/rfc/rfc5761.html"
+        },
+        {
+          "type": "source",
+          "text": "[V23] RFC 8489 STUN",
+          "url": "https://www.rfc-editor.org/rfc/rfc8489.html"
+        },
+        {
+          "type": "source",
+          "text": "[V24] RFC 4733 RTP Telephone Events",
+          "url": "https://www.rfc-editor.org/rfc/rfc4733.html"
+        },
+        {
+          "type": "source",
+          "text": "[V25] RFC 3389 Comfort Noise",
+          "url": "https://www.rfc-editor.org/rfc/rfc3389.html"
+        },
+        {
+          "type": "source",
+          "text": "[V26] RFC 4867 AMR and AMR WB",
+          "url": "https://www.rfc-editor.org/rfc/rfc4867.html"
+        },
+        {
+          "type": "source",
+          "text": "[V27] RFC 3711 SRTP",
+          "url": "https://www.rfc-editor.org/rfc/rfc3711.html"
+        },
+        {
+          "type": "source",
+          "text": "[V28] RFC 8656 TURN",
+          "url": "https://www.rfc-editor.org/rfc/rfc8656.html"
+        },
+        {
+          "type": "source",
+          "text": "[V29] RFC 6062 TURN TCP Allocations",
+          "url": "https://www.rfc-editor.org/rfc/rfc6062.html"
+        },
+        {
+          "type": "source",
+          "text": "[V30] RFC 7983 Multiplexing Scheme",
+          "url": "https://www.rfc-editor.org/rfc/rfc7983.html"
+        },
+        {
+          "type": "source",
+          "text": "[V31] RFC 8445 ICE",
+          "url": "https://www.rfc-editor.org/rfc/rfc8445.html"
+        },
+        {
+          "type": "source",
+          "text": "[V32] RFC 5626 SIP Outbound",
+          "url": "https://www.rfc-editor.org/rfc/rfc5626.html"
+        },
+        {
+          "type": "source",
+          "text": "[V33] RFC 7675 Consent Freshness",
+          "url": "https://www.rfc-editor.org/rfc/rfc7675.html"
+        },
+        {
+          "type": "source",
+          "text": "[V34] RFC 7714 AES GCM for SRTP",
+          "url": "https://www.rfc-editor.org/rfc/rfc7714.html"
+        },
+        {
+          "type": "source",
+          "text": "[V35] RFC 5764 DTLS SRTP",
+          "url": "https://www.rfc-editor.org/rfc/rfc5764.html"
+        },
+        {
+          "type": "source",
+          "text": "[V36] RFC 5763 SDP Framework for DTLS SRTP",
+          "url": "https://www.rfc-editor.org/rfc/rfc5763.html"
+        },
+        {
+          "type": "source",
+          "text": "[V37] RFC 9147 DTLS 1.3",
+          "url": "https://www.rfc-editor.org/rfc/rfc9147.html"
+        },
+        {
+          "type": "source",
+          "text": "[V38] RFC 8446 TLS 1.3",
+          "url": "https://www.rfc-editor.org/rfc/rfc8446.html"
+        },
+        {
+          "type": "source",
+          "text": "[V39] RFC 3435 MGCP 1.0 Informational",
+          "url": "https://www.rfc-editor.org/rfc/rfc3435.html"
+        },
+        {
+          "type": "source",
+          "text": "[V40] RFC 3525 Gateway Control Protocol Version 1 Historic",
+          "url": "https://www.rfc-editor.org/rfc/rfc3525.html"
+        },
+        {
+          "type": "source",
+          "text": "[V41] RFC 5456 IAX2 Informational",
+          "url": "https://www.rfc-editor.org/rfc/rfc5456.html"
+        },
+        {
+          "type": "source",
+          "text": "[V42] RFC 2198 RTP Redundant Audio",
+          "url": "https://www.rfc-editor.org/rfc/rfc2198.html"
+        },
+        {
+          "type": "source",
+          "text": "[V43] RFC 4588 RTP Retransmission",
+          "url": "https://www.rfc-editor.org/rfc/rfc4588.html"
+        },
+        {
+          "type": "source",
+          "text": "[V44] RFC 5109 Generic FEC",
+          "url": "https://www.rfc-editor.org/rfc/rfc5109.html"
+        },
+        {
+          "type": "source",
+          "text": "[V45] RFC 5506 Reduced Size RTCP",
+          "url": "https://www.rfc-editor.org/rfc/rfc5506.html"
+        },
+        {
+          "type": "source",
+          "text": "[V46] RFC 5104 Codec Control Messages",
+          "url": "https://www.rfc-editor.org/rfc/rfc5104.html"
+        },
+        {
+          "type": "source",
+          "text": "[V47] RFC 3611 RTCP XR",
+          "url": "https://www.rfc-editor.org/rfc/rfc3611.html"
+        },
+        {
+          "type": "source",
+          "text": "[V48] RFC 8854 WebRTC FEC Requirements",
+          "url": "https://www.rfc-editor.org/rfc/rfc8854.html"
+        },
+        {
+          "type": "source",
+          "text": "[V49] RFC 4568 SDP Security Descriptions",
+          "url": "https://www.rfc-editor.org/rfc/rfc4568.html"
+        },
+        {
+          "type": "source",
+          "text": "[V50] RFC 3830 MIKEY",
+          "url": "https://www.rfc-editor.org/rfc/rfc3830.html"
+        },
+        {
+          "type": "source",
+          "text": "[V51] RFC 6189 ZRTP Informational",
+          "url": "https://www.rfc-editor.org/rfc/rfc6189.html"
+        },
+        {
+          "type": "source",
+          "text": "[V52] ITU T H.323 Packet based multimedia systems",
+          "url": "https://www.itu.int/rec/T-REC-H.323"
+        },
+        {
+          "type": "source",
+          "text": "[V53] ITU T H.225.0 Call signalling and media packetization",
+          "url": "https://www.itu.int/rec/T-REC-H.225.0"
+        },
+        {
+          "type": "source",
+          "text": "[V54] ITU T H.245 Multimedia control protocol",
+          "url": "https://www.itu.int/rec/T-REC-H.245"
+        },
+        {
+          "type": "source",
+          "text": "[V55] ITU T H.248.1 Gateway control protocol",
+          "url": "https://www.itu.int/rec/T-REC-H.248.1"
+        },
+        {
+          "type": "source",
+          "text": "[V56] RFC 3372 SIP T Framework",
+          "url": "https://www.rfc-editor.org/rfc/rfc3372.html"
+        },
+        {
+          "type": "source",
+          "text": "[V57] ITU T T.38 Group 3 facsimile over IP",
+          "url": "https://www.itu.int/rec/T-REC-T.38"
+        },
+        {
+          "type": "source",
+          "text": "[V58] IANA STUN Parameters",
+          "url": "https://www.iana.org/assignments/stun-parameters/"
+        },
+        {
+          "type": "source",
+          "text": "[V59] IANA RTCP XR Block Types",
+          "url": "https://www.iana.org/assignments/rtcp-xr-block-types/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,560 @@
+{
+  "sources": [
+    {
+      "url": "https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-H.225.0-202203-I!!PDF-E&type=items",
+      "sha256": "c61d94d37a284691f785c2cded1dfd36af259d50c1c46ca038d644bfbb704bf2",
+      "edition": "03/2022"
+    },
+    {
+      "url": "https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-H.245-202203-I!!PDF-E&type=items",
+      "sha256": "914510e11b99a371147d32507d71379f70de47c039bd390b8d9353b2b1fdd5c5",
+      "edition": "03/2022"
+    }
+  ],
+  "groups": [
+    {
+      "label": "H2250 RAS",
+      "choice": "RasMessage",
+      "printed_pages": "165~166",
+      "purpose": "Gatekeeper 발견, 등록, admission, 대역폭·위치·자원과 서비스 제어의 메시지다.",
+      "choices": [
+        {
+          "name": "gatekeeperRequest",
+          "asn_type": "GatekeeperRequest"
+        },
+        {
+          "name": "gatekeeperConfirm",
+          "asn_type": "GatekeeperConfirm"
+        },
+        {
+          "name": "gatekeeperReject",
+          "asn_type": "GatekeeperReject"
+        },
+        {
+          "name": "registrationRequest",
+          "asn_type": "RegistrationRequest"
+        },
+        {
+          "name": "registrationConfirm",
+          "asn_type": "RegistrationConfirm"
+        },
+        {
+          "name": "registrationReject",
+          "asn_type": "RegistrationReject"
+        },
+        {
+          "name": "unregistrationRequest",
+          "asn_type": "UnregistrationRequest"
+        },
+        {
+          "name": "unregistrationConfirm",
+          "asn_type": "UnregistrationConfirm"
+        },
+        {
+          "name": "unregistrationReject",
+          "asn_type": "UnregistrationReject"
+        },
+        {
+          "name": "admissionRequest",
+          "asn_type": "AdmissionRequest"
+        },
+        {
+          "name": "admissionConfirm",
+          "asn_type": "AdmissionConfirm"
+        },
+        {
+          "name": "admissionReject",
+          "asn_type": "AdmissionReject"
+        },
+        {
+          "name": "bandwidthRequest",
+          "asn_type": "BandwidthRequest"
+        },
+        {
+          "name": "bandwidthConfirm",
+          "asn_type": "BandwidthConfirm"
+        },
+        {
+          "name": "bandwidthReject",
+          "asn_type": "BandwidthReject"
+        },
+        {
+          "name": "disengageRequest",
+          "asn_type": "DisengageRequest"
+        },
+        {
+          "name": "disengageConfirm",
+          "asn_type": "DisengageConfirm"
+        },
+        {
+          "name": "disengageReject",
+          "asn_type": "DisengageReject"
+        },
+        {
+          "name": "locationRequest",
+          "asn_type": "LocationRequest"
+        },
+        {
+          "name": "locationConfirm",
+          "asn_type": "LocationConfirm"
+        },
+        {
+          "name": "locationReject",
+          "asn_type": "LocationReject"
+        },
+        {
+          "name": "infoRequest",
+          "asn_type": "InfoRequest"
+        },
+        {
+          "name": "infoRequestResponse",
+          "asn_type": "InfoRequestResponse"
+        },
+        {
+          "name": "nonStandardMessage",
+          "asn_type": "NonStandardMessage"
+        },
+        {
+          "name": "unknownMessageResponse",
+          "asn_type": "UnknownMessageResponse"
+        },
+        {
+          "name": "requestInProgress",
+          "asn_type": "RequestInProgress"
+        },
+        {
+          "name": "resourcesAvailableIndicate",
+          "asn_type": "ResourcesAvailableIndicate"
+        },
+        {
+          "name": "resourcesAvailableConfirm",
+          "asn_type": "ResourcesAvailableConfirm"
+        },
+        {
+          "name": "infoRequestAck",
+          "asn_type": "InfoRequestAck"
+        },
+        {
+          "name": "infoRequestNak",
+          "asn_type": "InfoRequestNak"
+        },
+        {
+          "name": "serviceControlIndication",
+          "asn_type": "ServiceControlIndication"
+        },
+        {
+          "name": "serviceControlResponse",
+          "asn_type": "ServiceControlResponse"
+        },
+        {
+          "name": "admissionConfirmSequence",
+          "asn_type": "SEQUENCE OF AdmissionConfirm"
+        }
+      ]
+    },
+    {
+      "label": "H2250 호출 신호 본문",
+      "choice": "h323-message-body",
+      "printed_pages": "143~144",
+      "purpose": "호 설정·진행·접속·해제 및 상태 정보를 담는 UUIE의 선택지다.",
+      "choices": [
+        {
+          "name": "setup",
+          "asn_type": "Setup-UUIE"
+        },
+        {
+          "name": "callProceeding",
+          "asn_type": "CallProceeding-UUIE"
+        },
+        {
+          "name": "connect",
+          "asn_type": "Connect-UUIE"
+        },
+        {
+          "name": "alerting",
+          "asn_type": "Alerting-UUIE"
+        },
+        {
+          "name": "information",
+          "asn_type": "Information-UUIE"
+        },
+        {
+          "name": "releaseComplete",
+          "asn_type": "ReleaseComplete-UUIE"
+        },
+        {
+          "name": "facility",
+          "asn_type": "Facility-UUIE"
+        },
+        {
+          "name": "progress",
+          "asn_type": "Progress-UUIE"
+        },
+        {
+          "name": "empty",
+          "asn_type": "NULL"
+        },
+        {
+          "name": "status",
+          "asn_type": "Status-UUIE"
+        },
+        {
+          "name": "statusInquiry",
+          "asn_type": "StatusInquiry-UUIE"
+        },
+        {
+          "name": "setupAcknowledge",
+          "asn_type": "SetupAcknowledge-UUIE"
+        },
+        {
+          "name": "notify",
+          "asn_type": "Notify-UUIE"
+        }
+      ]
+    },
+    {
+      "label": "H245 Request",
+      "choice": "RequestMessage",
+      "printed_pages": "13~14",
+      "purpose": "능력·논리 채널·모드·왕복 지연과 회의 제어 등을 요청한다.",
+      "choices": [
+        {
+          "name": "nonStandard",
+          "asn_type": "NonStandardMessage"
+        },
+        {
+          "name": "masterSlaveDetermination",
+          "asn_type": "MasterSlaveDetermination"
+        },
+        {
+          "name": "terminalCapabilitySet",
+          "asn_type": "TerminalCapabilitySet"
+        },
+        {
+          "name": "openLogicalChannel",
+          "asn_type": "OpenLogicalChannel"
+        },
+        {
+          "name": "closeLogicalChannel",
+          "asn_type": "CloseLogicalChannel"
+        },
+        {
+          "name": "requestChannelClose",
+          "asn_type": "RequestChannelClose"
+        },
+        {
+          "name": "multiplexEntrySend",
+          "asn_type": "MultiplexEntrySend"
+        },
+        {
+          "name": "requestMultiplexEntry",
+          "asn_type": "RequestMultiplexEntry"
+        },
+        {
+          "name": "requestMode",
+          "asn_type": "RequestMode"
+        },
+        {
+          "name": "roundTripDelayRequest",
+          "asn_type": "RoundTripDelayRequest"
+        },
+        {
+          "name": "maintenanceLoopRequest",
+          "asn_type": "MaintenanceLoopRequest"
+        },
+        {
+          "name": "communicationModeRequest",
+          "asn_type": "CommunicationModeRequest"
+        },
+        {
+          "name": "conferenceRequest",
+          "asn_type": "ConferenceRequest"
+        },
+        {
+          "name": "multilinkRequest",
+          "asn_type": "MultilinkRequest"
+        },
+        {
+          "name": "logicalChannelRateRequest",
+          "asn_type": "LogicalChannelRateRequest"
+        },
+        {
+          "name": "genericRequest",
+          "asn_type": "GenericMessage"
+        }
+      ]
+    },
+    {
+      "label": "H245 Response",
+      "choice": "ResponseMessage",
+      "printed_pages": "14",
+      "purpose": "Request에 대한 명시적 응답이며 수락과 거절 또는 결과를 담는다.",
+      "choices": [
+        {
+          "name": "nonStandard",
+          "asn_type": "NonStandardMessage"
+        },
+        {
+          "name": "masterSlaveDeterminationAck",
+          "asn_type": "MasterSlaveDeterminationAck"
+        },
+        {
+          "name": "masterSlaveDeterminationReject",
+          "asn_type": "MasterSlaveDeterminationReject"
+        },
+        {
+          "name": "terminalCapabilitySetAck",
+          "asn_type": "TerminalCapabilitySetAck"
+        },
+        {
+          "name": "terminalCapabilitySetReject",
+          "asn_type": "TerminalCapabilitySetReject"
+        },
+        {
+          "name": "openLogicalChannelAck",
+          "asn_type": "OpenLogicalChannelAck"
+        },
+        {
+          "name": "openLogicalChannelReject",
+          "asn_type": "OpenLogicalChannelReject"
+        },
+        {
+          "name": "closeLogicalChannelAck",
+          "asn_type": "CloseLogicalChannelAck"
+        },
+        {
+          "name": "requestChannelCloseAck",
+          "asn_type": "RequestChannelCloseAck"
+        },
+        {
+          "name": "requestChannelCloseReject",
+          "asn_type": "RequestChannelCloseReject"
+        },
+        {
+          "name": "multiplexEntrySendAck",
+          "asn_type": "MultiplexEntrySendAck"
+        },
+        {
+          "name": "multiplexEntrySendReject",
+          "asn_type": "MultiplexEntrySendReject"
+        },
+        {
+          "name": "requestMultiplexEntryAck",
+          "asn_type": "RequestMultiplexEntryAck"
+        },
+        {
+          "name": "requestMultiplexEntryReject",
+          "asn_type": "RequestMultiplexEntryReject"
+        },
+        {
+          "name": "requestModeAck",
+          "asn_type": "RequestModeAck"
+        },
+        {
+          "name": "requestModeReject",
+          "asn_type": "RequestModeReject"
+        },
+        {
+          "name": "roundTripDelayResponse",
+          "asn_type": "RoundTripDelayResponse"
+        },
+        {
+          "name": "maintenanceLoopAck",
+          "asn_type": "MaintenanceLoopAck"
+        },
+        {
+          "name": "maintenanceLoopReject",
+          "asn_type": "MaintenanceLoopReject"
+        },
+        {
+          "name": "communicationModeResponse",
+          "asn_type": "CommunicationModeResponse"
+        },
+        {
+          "name": "conferenceResponse",
+          "asn_type": "ConferenceResponse"
+        },
+        {
+          "name": "multilinkResponse",
+          "asn_type": "MultilinkResponse"
+        },
+        {
+          "name": "logicalChannelRateAcknowledge",
+          "asn_type": "LogicalChannelRateAcknowledge"
+        },
+        {
+          "name": "logicalChannelRateReject",
+          "asn_type": "LogicalChannelRateReject"
+        },
+        {
+          "name": "genericResponse",
+          "asn_type": "GenericMessage"
+        }
+      ]
+    },
+    {
+      "label": "H245 Command",
+      "choice": "CommandMessage",
+      "printed_pages": "14~15",
+      "purpose": "동작을 지시하며 이 상위 분류 자체로는 명시적 응답을 요구하지 않는다.",
+      "choices": [
+        {
+          "name": "nonStandard",
+          "asn_type": "NonStandardMessage"
+        },
+        {
+          "name": "maintenanceLoopOffCommand",
+          "asn_type": "MaintenanceLoopOffCommand"
+        },
+        {
+          "name": "sendTerminalCapabilitySet",
+          "asn_type": "SendTerminalCapabilitySet"
+        },
+        {
+          "name": "encryptionCommand",
+          "asn_type": "EncryptionCommand"
+        },
+        {
+          "name": "flowControlCommand",
+          "asn_type": "FlowControlCommand"
+        },
+        {
+          "name": "endSessionCommand",
+          "asn_type": "EndSessionCommand"
+        },
+        {
+          "name": "miscellaneousCommand",
+          "asn_type": "MiscellaneousCommand"
+        },
+        {
+          "name": "communicationModeCommand",
+          "asn_type": "CommunicationModeCommand"
+        },
+        {
+          "name": "conferenceCommand",
+          "asn_type": "ConferenceCommand"
+        },
+        {
+          "name": "h223MultiplexReconfiguration",
+          "asn_type": "H223MultiplexReconfiguration"
+        },
+        {
+          "name": "newATMVCCommand",
+          "asn_type": "NewATMVCCommand"
+        },
+        {
+          "name": "mobileMultilinkReconfigurationCommand",
+          "asn_type": "MobileMultilinkReconfigurationCommand"
+        },
+        {
+          "name": "genericCommand",
+          "asn_type": "GenericMessage"
+        }
+      ]
+    },
+    {
+      "label": "H245 Indication",
+      "choice": "IndicationMessage",
+      "printed_pages": "15~16",
+      "purpose": "정보를 전달하며 이 상위 분류 자체로는 동작이나 응답을 요구하지 않는다.",
+      "choices": [
+        {
+          "name": "nonStandard",
+          "asn_type": "NonStandardMessage"
+        },
+        {
+          "name": "functionNotUnderstood",
+          "asn_type": "FunctionNotUnderstood"
+        },
+        {
+          "name": "masterSlaveDeterminationRelease",
+          "asn_type": "MasterSlaveDeterminationRelease"
+        },
+        {
+          "name": "terminalCapabilitySetRelease",
+          "asn_type": "TerminalCapabilitySetRelease"
+        },
+        {
+          "name": "openLogicalChannelConfirm",
+          "asn_type": "OpenLogicalChannelConfirm"
+        },
+        {
+          "name": "requestChannelCloseRelease",
+          "asn_type": "RequestChannelCloseRelease"
+        },
+        {
+          "name": "multiplexEntrySendRelease",
+          "asn_type": "MultiplexEntrySendRelease"
+        },
+        {
+          "name": "requestMultiplexEntryRelease",
+          "asn_type": "RequestMultiplexEntryRelease"
+        },
+        {
+          "name": "requestModeRelease",
+          "asn_type": "RequestModeRelease"
+        },
+        {
+          "name": "miscellaneousIndication",
+          "asn_type": "MiscellaneousIndication"
+        },
+        {
+          "name": "jitterIndication",
+          "asn_type": "JitterIndication"
+        },
+        {
+          "name": "h223SkewIndication",
+          "asn_type": "H223SkewIndication"
+        },
+        {
+          "name": "newATMVCIndication",
+          "asn_type": "NewATMVCIndication"
+        },
+        {
+          "name": "userInput",
+          "asn_type": "UserInputIndication"
+        },
+        {
+          "name": "h2250MaximumSkewIndication",
+          "asn_type": "H2250MaximumSkewIndication"
+        },
+        {
+          "name": "mcLocationIndication",
+          "asn_type": "MCLocationIndication"
+        },
+        {
+          "name": "conferenceIndication",
+          "asn_type": "ConferenceIndication"
+        },
+        {
+          "name": "vendorIdentification",
+          "asn_type": "VendorIdentification"
+        },
+        {
+          "name": "functionNotSupported",
+          "asn_type": "FunctionNotSupported"
+        },
+        {
+          "name": "multilinkIndication",
+          "asn_type": "MultilinkIndication"
+        },
+        {
+          "name": "logicalChannelRateRelease",
+          "asn_type": "LogicalChannelRateRelease"
+        },
+        {
+          "name": "flowControlIndication",
+          "asn_type": "FlowControlIndication"
+        },
+        {
+          "name": "mobileMultilinkReconfigurationIndication",
+          "asn_type": "MobileMultilinkReconfigurationIndication"
+        },
+        {
+          "name": "genericIndication",
+          "asn_type": "GenericMessage"
+        }
+      ]
+    }
+  ]
+}

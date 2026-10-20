@@ -1,0 +1,97 @@
+{
+  "retrieved_date": "2026-10-20",
+  "timezone": "Asia/Seoul",
+  "olsrd": {
+    "repository": "https://github.com/OLSR/olsrd",
+    "tag": "v0.6.8",
+    "commit": "51ac86b22ee2bdb1077c889859ad3ca5a39aa079",
+    "archive_url": "https://codeload.github.com/OLSR/olsrd/zip/refs/tags/v0.6.8",
+    "files_sha256": {
+      "src/olsr_protocol.h": "b2127b2398217d923b1bc2ee3f52e66df20c0a75bae6f6203d84296eaa7d00e5",
+      "src/olsr_cfg.h": "0b598df70f033f5a59c8200eeead0c810c2d9aabf5413b62e5f046e1dc55b599",
+      "src/lq_packet.c": "7ad76bd526ac6b70c87eca097efadf264c72d4986db51fc37a8ad91550f85199",
+      "src/lq_packet.h": "5dea05b3d5e99fdee54e212e848fb446029b90a626ec9ac7db4f9e8f62eea224",
+      "src/lq_plugin.c": "b41783dfc1f8f8d8195f227221927f17ac5db4c6331a694876e442f98c60a239",
+      "src/lq_plugin_default_ff.c": "bdcb1c72095d673799e22e513879484a1e9b38c6d08d5743d4bd422120ff4443",
+      "src/net_olsr.c": "9cc887e3fd1831ddaa3f95f9c7dc2154feed09b1ec6ac8fdd9e196a9ad6ecfdd",
+      "src/parser.c": "e48570d9430376358955dc1257eec36f5ad2d01f241da6de540839db05de3e64",
+      "src/mantissa.c": "b5023f4686b3ba0524ad52daa0824e5c150c2e315e4a48608c574c8bdee897dc",
+      "src/build_msg.c": "b1aa441540b11035d7f66047da5e5d5f9106bc32928087bf2fc93afd0ab6b9e4",
+      "src/generate_msg.c": "cccc9d65a652f876f6cd438e13d5212b4b6723d5afa42ec96dd28fd7871f2f83",
+      "src/gateway.c": "de23df6c751728b1e66b7281d7b247f588414496ed2c819e06890a33d63d8a6d",
+      "src/gateway.h": "2f9c1fb0e2b7f478bf412083c66ba202c9f64d4835e31ed69484a826e9aa9af3",
+      "src/olsr.c": "190e16b1b5d52f1ef7aa7233b6e29ce0b6c6e968ae68e360101ebb44c2a7e33a",
+      "src/process_package.c": "78d1efe57032e5e51ecbc61cb90c483de53138e4aa08c1b16383e344def3ffe3",
+      "src/cfgparser/olsrd_conf.c": "5d6ebdedf1cfe88e94e6be504ce3ef0d600e99be24ee049acd49deb9523a06d2",
+      "src/olsr_types.h": "f94019625e3711b7b718579e90f77c05efcb449711bfcb3819a54d0d8ac42dd3",
+      "lib/secure/src/olsrd_secure.c": "87eaa71582f37f0e072fc5b1e0eeae6f7d8d724125f0874a394d8be506d02e35",
+      "lib/secure/src/secure_messages.h": "df39b0daa5bc7fdd37c97ee24ee12c988068c3fa360cb6bb8209063628639344",
+      "lib/nameservice/src/nameservice.c": "2aa081515fe2708a0576039440ec57ea3544cc096aace689ad59178b484bd5cc",
+      "lib/nameservice/src/nameservice.h": "472f64a3e10ce7cc8ece671c6b1b8f25a4f791b7610104ba03114d8112c633a8",
+      "lib/nameservice/src/nameservice_msg.h": "d03f4134ff204c4ae468463b04572c33805c2c2e313b26aa6480daa81cac12d1",
+      "lib/mdns/src/mdns.c": "3b8a2c376c0e3ae044e52f428baaabad99ca8b3f0078dabfd954cfdb01993e06",
+      "lib/mdns/src/RouterElection.c": "5b44525a95c7bcdfb41911699ddc6bbf558660a122e8e5f99b780af0dbbb2ea4",
+      "lib/mdns/src/RouterElection.h": "03fa567bac535bc1248e21a168eb0515ccef9c3616b4bc1f2707d970c40109b5",
+      "lib/p2pd/src/p2pd.c": "13d9331e763d0640a79f88265bacdcef3a73bf2cfa75f3319a234858333876f8",
+      "lib/pud/wireformat/include/OlsrdPudWireFormat/wireFormat.h": "9491f5f1b0590c81d00598f1d0185daabe482c57a204cdd490f05b5b1fd88391",
+      "lib/pud/src/configuration.h": "2cd8f8f269654299231a36d2b310ea9befd2fb5c12f3c2099d4e2b662b38e5da",
+      "lib/pud/src/gpsConversion.c": "d408da540ca9d15b91da6e7a4b80fb225f627195941456b9cb08b344934d5eed",
+      "lib/bmf/src/Packet.h": "3c98f96e0814849960a1e98cf9860cc4a8170810533a62c6b2934099c77c3a67",
+      "lib/bmf/src/Bmf.h": "bf0dc7697926b4a19dc9dcb1340881a1644c068f4656ea3cdae2ceddf5a93ac2",
+      "lib/txtinfo/src/olsrd_plugin.c": "d9c4bda42d79c54ab809f87b07330e6cc21c239f864c3c85daec8bcd8a71e473",
+      "lib/jsoninfo/src/olsrd_plugin.c": "c7c1fe1e660d5056255fc3c3e111a6a51356a49c6ed5c105e2e0675bc789e3ef",
+      "lib/httpinfo/src/olsrd_httpinfo.c": "b1dabedc71392252b53f87b1d3ee6e86ceb83abeb46f6c295c881a1435940d0b",
+      "lib/pgraph/src/olsrd_pgraph.c": "3eba748a613fc91c2fc5352e59988836171d1c8ec6b4d772cfc9f9f501c2a035",
+      "src/ipc_frontend.h": "883e5c154463ff638d3426a497389e814301a8e4b011066554bacbbc9f123338"
+    },
+    "downloaded_archive_sha256": "56a9bf4a51053f84acd0e6261930e780b3a425e4b6d9c36532f24fb65c39bf0c"
+  },
+  "iana": [
+    {
+      "file": "rtcp-xr-block-types.xml",
+      "url": "https://www.iana.org/assignments/rtcp-xr-block-types/rtcp-xr-block-types.xml",
+      "last_updated": "2026-08-04",
+      "sha256": "893fe00992fa65ea8b8cc148038d20cde6e5a7f0fdfafc008492ac3a0d8a2139"
+    },
+    {
+      "file": "rtp-parameters.xml",
+      "url": "https://www.iana.org/assignments/rtp-parameters/rtp-parameters.xml",
+      "last_updated": "2026-10-09",
+      "sha256": "dc7cb2336045ec592ac02dfcdeb7b3a5ecc348cf4a4a340674c7717b68a5bc5e"
+    },
+    {
+      "file": "sdp-parameters.xml",
+      "url": "https://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml",
+      "last_updated": "2026-10-09",
+      "sha256": "929b5210bd6209296f1b5a752d143bc7c5f4ee4197403599cfd8c1706a41f20d"
+    },
+    {
+      "file": "sip-parameters.xml",
+      "url": "https://www.iana.org/assignments/sip-parameters/sip-parameters.xml",
+      "last_updated": "2026-08-17",
+      "sha256": "3223a6c7118e37a92d1749f69b3e6896c8ff3e5dc797d98042a00f07269f80be"
+    },
+    {
+      "file": "stun-parameters.xml",
+      "url": "https://www.iana.org/assignments/stun-parameters/stun-parameters.xml",
+      "last_updated": "2024-12-20",
+      "sha256": "8f64831a9326cf02b53f78b6fe7a22764a210128f28adf6468c17d8f546a5853"
+    }
+  ],
+  "verification": {
+    "method": "static source inspection and synthetic offline examples",
+    "live_daemon_test": false
+  },
+  "itu": [
+    {
+      "url": "https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-H.225.0-202203-I!!PDF-E&type=items",
+      "sha256": "c61d94d37a284691f785c2cded1dfd36af259d50c1c46ca038d644bfbb704bf2",
+      "edition": "03/2022"
+    },
+    {
+      "url": "https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-H.245-202203-I!!PDF-E&type=items",
+      "sha256": "914510e11b99a371147d32507d71379f70de47c039bd390b8d9353b2b1fdd5c5",
+      "edition": "03/2022"
+    }
+  ]
+}
